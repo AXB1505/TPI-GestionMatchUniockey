@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>946</x>
+      <y>308</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Match
+--
+- equEquipe1 : equipe
+- equEquipe2 : equipe
+- dateDebut : date
+- iScoreEquipe1 : int
+- iScoreEquipe2 : int
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>99</x>
+      <y>308</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Categorie
+--
+- Nom : string
+- DureePeriode : int
+- NombrePeriode : int
+--
++getNom()
++setNom(nom)
++getDureePeriode()
++setDureePeriode()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>506</x>
+      <y>308</y>
+      <w>231</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>Equipe
+--
+- Nom : nom
+- Categorie : categorie
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
