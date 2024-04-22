@@ -3,13 +3,22 @@
     x:Class="Unihockey.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Unihockey"
+    xmlns:local="clr-namespace:Unihockey.Pages"
     Shell.FlyoutBehavior="Disabled"
     Title="Unihockey">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    <TabBar>
+        <Tab Title="Accueil">
+            <ShellContent
+                Title="Accueil"
+                ContentTemplate="{DataTemplate local:Accueil}"
+                Route="Accueil" />
+        </Tab>
+        <Tab Title="MainPage">
+            <ShellContent
+                Title="MainPage"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+    </TabBar>
 </Shell>

@@ -6,9 +6,35 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <!--<ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+            <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="OppenSansRegular"/>
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            <!--Style du font de pages-->
+            <Style x:Key="PagesStyle" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="LightGray" />
+            </Style>
+            <Style x:Key="ChronometreStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="#EEE" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 30" />
+            </Style>
+            <Style x:Key="PointStyle" TargetType="Border">
+                <Setter Property="Background" Value="#EEE"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Background" Value="DarkGray"></Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

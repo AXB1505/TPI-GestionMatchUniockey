@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Unihockey.Pages.GestionMatch"
+             Title="GestionMatch"
+             Style="{StaticResource PagesStyle}">
+    <!-- Grille de disposition de la page de chronomètrage -->
+    <Grid RowDefinitions="3*,1*,2*">
+        <Grid Grid.Row="0"
+              RowDefinitions="6*,*">
+
+            <!-- Chronometre principal -->
+
+            <Border Grid.Row="0"
+                    Style="{StaticResource ChronometreStyle}"
+                    WidthRequest="800"
+                    Margin="20,20,20,0">
+                <Label x:Name="lblChronoPrincipal"
+                       Text="00:00"
+                       FontSize="250"/>
+            </Border>
+
+            <!-- Emplacement des boutons du chronomètre principal -->
+            <HorizontalStackLayout Grid.Row="1" 
+                                   BackgroundColor="Transparent"
+                                   HorizontalOptions="Center"
+                                   Spacing="14">
+                <Button x:Name="btnPlay"
+                        Text="Play"/>
+                <Button x:Name="btnPause"
+                        Text="Pause"/>
+                <Button x:Name="btnStop"
+                        Text="Stop"/>
+
+                <VerticalStackLayout>
+                    <CheckBox x:Name="CbxCroissant"/>
+                    <Label Text="Croissant ?"/>
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!-- Grille de disposition du des équipes et du chronomètre secondaire -->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,2*,*">
+            <Label Grid.Column="0" Text="Equipe 1" FontSize="40"/>
+
+            <Label Grid.Column="2" Text="Equipe 2" FontSize="40"/>
+        </Grid>
+
+        <!-- Grille de disposition des points et des temps morts-->
+        <Grid Grid.Row="2" 
+              ColumnDefinitions="1*,2*,1*">
+            <Grid Grid.Column="0"
+                  ColumnDefinitions="1*,4*,1*">
+                <Button Grid.Column="0" Text="-" FontSize="40"/>
+                <Border Grid.Column="1" Style="{StaticResource PointStyle}">
+                    <Label Text="0" FontSize="150"/>
+                </Border>
+                <Button Grid.Column="2" Text="+" FontSize="40"/>
+            </Grid>
+
+            <!--Grille de disposition des temps morts-->
+            <Grid Grid.Column="1"
+                  RowDefinitions="*,*,*"
+                  ColumnDefinitions="*,*"
+                  Padding="10">
+                <VerticalStackLayout Grid.Column="0" Grid.Row="0"
+                                     HorizontalOptions="Center">
+                    <Border Style="{StaticResource ChronometreStyle}">
+                        <Label Text="00:00"/>
+                    </Border>
+                    <HorizontalStackLayout>
+                        <Button
+                        Text="Play"/>
+                        <Button
+                        Text="Pause"/>
+                        <Button
+                        Text="Stop"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Grid.Row="0"
+                                     HorizontalOptions="Center">
+                    <Border Style="{StaticResource ChronometreStyle}">
+                        <Label Text="00:00"/>
+                    </Border>
+                    <HorizontalStackLayout>
+                        <Button
+                        Text="Play"/>
+                        <Button
+                        Text="Pause"/>
+                        <Button
+                        Text="Stop"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="0" Grid.Row="1"
+                                     HorizontalOptions="Center">
+                    <Border Style="{StaticResource ChronometreStyle}">
+                        <Label Text="00:00"/>
+                    </Border>
+                    <HorizontalStackLayout>
+                        <Button
+                        Text="Play"/>
+                        <Button
+                        Text="Pause"/>
+                        <Button
+                        Text="Stop"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Grid.Row="1"
+                                     HorizontalOptions="Center">
+                    <Border Style="{StaticResource ChronometreStyle}">
+                        <Label Text="00:00"/>
+                    </Border>
+                    <HorizontalStackLayout>
+                        <Button
+                        Text="Play"/>
+                        <Button
+                        Text="Pause"/>
+                        <Button
+                        Text="Stop"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="0" Grid.Row="2"
+                                     HorizontalOptions="Center">
+                    <Border Style="{StaticResource ChronometreStyle}">
+                        <Label Text="00:00"/>
+                    </Border>
+                    <HorizontalStackLayout>
+                        <Button
+                        Text="Play"/>
+                        <Button
+                        Text="Pause"/>
+                        <Button
+                        Text="Stop"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Grid.Row="2"
+                                     HorizontalOptions="Center">
+                    <Border Style="{StaticResource ChronometreStyle}">
+                        <Label Text="00:00"/>
+                    </Border>
+                    <HorizontalStackLayout>
+                        <Button
+                        Text="Play"/>
+                        <Button
+                        Text="Pause"/>
+                        <Button
+                        Text="Stop"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+            </Grid>
+
+            <Grid Grid.Column="2"
+                ColumnDefinitions="1*,4*,1*">
+                <Button Grid.Column="0" Text="-" FontSize="40"/>
+                <Border Grid.Column="1" Style="{StaticResource PointStyle}">
+                    <Label Text="0" FontSize="150"/>
+                </Border>
+                <Button Grid.Column="2" Text="+" FontSize="40"/>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</ContentPage>
