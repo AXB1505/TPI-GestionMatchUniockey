@@ -1,3 +1,5 @@
+using Unihockey.Model;
+
 namespace Unihockey.Pages;
 
 public partial class Accueil : ContentPage
@@ -8,8 +10,15 @@ public partial class Accueil : ContentPage
 	}
 
 
-	private void OnbtnCreerMatchClicked(object sender, EventArgs e)
+	private void OnbtnCreerMatch1x24Clicked(object sender, EventArgs e)
 	{
+		Match match = new Match();
 		Navigation.PushAsync(new GestionMatch());
+    }
+
+    private void OnbtnCreerMatch2x20Clicked(object sender, EventArgs e)
+    {
+        Match match = new Match();
+        Navigation.PushAsync(new GestionMatch());
     }
 }
