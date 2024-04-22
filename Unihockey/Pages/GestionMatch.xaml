@@ -17,7 +17,7 @@
                     Style="{StaticResource ChronometreStyle}"
                     WidthRequest="800"
                     Margin="20,20,20,0">
-                <Label x:Name="lblChronoPrincipal"
+                <Label x:Name="lblChrPrincipal"
                        Text="00:00"
                        FontSize="250"/>
             </Border>
@@ -28,16 +28,19 @@
                                    HorizontalOptions="Center"
                                    Spacing="14">
                 <Button x:Name="btnPlay"
-                        Text="Play"/>
+                        Text="Play"
+                        Clicked="OnbtnPlayClicked"/>
                 <Button x:Name="btnPause"
-                        Text="Pause"/>
+                        Text="Pause"
+                        Clicked="OnbtnPauseClicked"/>
                 <Button x:Name="btnStop"
                         Text="Stop"/>
                 <Border>
                     <VerticalStackLayout HorizontalOptions="Center">
-                        <CheckBox x:Name="CbxCroissant"/>
+                        <CheckBox x:Name="cbxCroissant"
+                                  CheckedChanged="OnCbxCroissantCheckedChanged"/>
                         <Label Text="Croissant ?"
-                           FontSize="20"/>
+                               FontSize="20"/>
                     </VerticalStackLayout>
                 </Border>
 
@@ -69,37 +72,103 @@
                   RowDefinitions="*,*,*"
                   ColumnDefinitions="*,*"
                   Padding="10">
-                <VerticalStackLayout Grid.Column="0" Grid.Row="0"
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="0"
                                      HorizontalOptions="Center">
-                    <controls:Penalite/>
-                </VerticalStackLayout>
+                    <HorizontalStackLayout>
+                        <VerticalStackLayout IsVisible="False">
+                            <Border Style="{StaticResource ChronometreStyle}">
+                                <Label Text="00:00"/>
+                            </Border>
+                            <HorizontalStackLayout>
+                                <Button Text="Play"/>
+                                <Button Text="Pause"/>
+                                <Button Text="Stop"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <CheckBox IsChecked="false"
+                                  CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
 
-                <VerticalStackLayout Grid.Column="1" Grid.Row="0"
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="0"
                                      HorizontalOptions="Center">
-                    <controls:Penalite/>
-                </VerticalStackLayout>
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"/>
+                            <Button Text="Pause"/>
+                            <Button Text="Stop"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox IsChecked="false"
+                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                </HorizontalStackLayout>
 
-                <VerticalStackLayout Grid.Column="0" Grid.Row="1"
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="1"
                                      HorizontalOptions="Center">
-                    <controls:Penalite/>
-                </VerticalStackLayout>
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"/>
+                            <Button Text="Pause"/>
+                            <Button Text="Stop"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox IsChecked="false"
+                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                </HorizontalStackLayout>
 
-                <VerticalStackLayout Grid.Column="1" Grid.Row="1"
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="1"
                                      HorizontalOptions="Center">
-                    <controls:Penalite/>
-                </VerticalStackLayout>
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"/>
+                            <Button Text="Pause"/>
+                            <Button Text="Stop"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox IsChecked="false"
+                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                </HorizontalStackLayout>
 
-                <VerticalStackLayout Grid.Column="0" Grid.Row="2"
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="2"
                                      HorizontalOptions="Center">
-                    <controls:Penalite/>
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"/>
+                            <Button Text="Pause"/>
+                            <Button Text="Stop"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox IsChecked="false"
+                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                </HorizontalStackLayout>
 
-                </VerticalStackLayout>
-
-                <VerticalStackLayout Grid.Column="1" Grid.Row="2"
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="2"
                                      HorizontalOptions="Center">
-                    <controls:Penalite/>
-
-                </VerticalStackLayout>
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"/>
+                            <Button Text="Pause"/>
+                            <Button Text="Stop"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox IsChecked="false"
+                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                </HorizontalStackLayout>
 
             </Grid>
 

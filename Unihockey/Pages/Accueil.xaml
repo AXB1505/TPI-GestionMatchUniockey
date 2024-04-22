@@ -11,10 +11,10 @@
             HorizontalOptions="Center" />
         <HorizontalStackLayout>
             <Button
-                Text="Créer un match"
+                Text="Créer un match de 1x24 minutes"
                 Clicked="OnbtnCreerMatch1x24Clicked" />
             <Button
-                Text="Créer un match"
+                Text="Créer un match 2x20 minutes"
                 Clicked="OnbtnCreerMatch2x20Clicked" />
 
         </HorizontalStackLayout>

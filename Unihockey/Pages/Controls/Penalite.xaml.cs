@@ -1,7 +1,10 @@
+using Unihockey.Model;
+
 namespace Unihockey.Pages.Controls;
 
 public partial class Penalite : ContentView
 {
+	Chronometre chrono = new Chronometre();
 	public Penalite()
 	{
 		InitializeComponent();

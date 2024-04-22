@@ -12,13 +12,16 @@ public partial class Accueil : ContentPage
 
 	private void OnbtnCreerMatch1x24Clicked(object sender, EventArgs e)
 	{
-		Match match = new Match();
-		Navigation.PushAsync(new GestionMatch());
+		int iPeriode = 1;
+		int iDureePeriode = 24;
+		Navigation.PushAsync(new GestionMatch(iPeriode, iDureePeriode));
     }
 
     private void OnbtnCreerMatch2x20Clicked(object sender, EventArgs e)
     {
+        int iPeriode = 2;
+        int iDureePeriode = 20;
         Match match = new Match();
-        Navigation.PushAsync(new GestionMatch());
+        Navigation.PushAsync(new GestionMatch(iPeriode, iDureePeriode));
     }
 }
