@@ -5,8 +5,10 @@ namespace Unihockey.Pages;
 
 public partial class GestionMatch : ContentPage
 {
+    AffichageMatch affMatch = new AffichageMatch();
+
     // Instanciation de l'objet Match
-    Match match = new Match();
+    Match mMatch = new Match();
 
     // Instantiation des points des équipes
     int iPointsEquipe1;
@@ -324,6 +326,8 @@ public partial class GestionMatch : ContentPage
             lblPenalite4.Text = chrPenalite4.GetTempsRestant();
             lblPenalite5.Text = chrPenalite5.GetTempsRestant();
             lblPenalite6.Text = chrPenalite6.GetTempsRestant();
+
+            affMatch.Layout.lblChronoPrincipal.Text = chrPrincipal.GetTempsRestant();
             await Task.Delay(25);
         }
     }

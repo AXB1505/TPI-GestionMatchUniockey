@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Unihockey.Pages.AffichageMatch"
+             xmlns:controls="clr-namespace:Unihockey.Pages.Controls"
+             Style="{StaticResource PagesStyle}">
+    <!--Title="GestionMatch"-->
+
+    <!-- Grille de disposition de la page de chronomètrage -->
+    <Grid RowDefinitions="3*,1*,2*">
+        <Grid Grid.Row="0"
+              RowDefinitions="6*,*">
+
+            <!-- Chronometre principal -->
+
+            <Border Grid.Row="0"
+                    Style="{StaticResource ChronometreStyle}"
+                    WidthRequest="800"
+                    Margin="20,20,20,0">
+                <Label x:Name="lblChrPrincipal"
+                       Text="00:00"
+                       FontSize="250"/>
+            </Border>
+        </Grid>
+
+        <!-- Grille de disposition des équipes et du titre "Pénalité"-->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,2*,*">
+            <Label Grid.Column="0" Text="Equipe 1" FontSize="40"/>
+            <Label Grid.Column="1" Text="Penalités" TextDecorations="Underline" FontSize="Title"/>
+            <Label Grid.Column="2" Text="Equipe 2" FontSize="40"/>
+        </Grid>
+
+        <!-- Grille de disposition des points et des pénalités-->
+        <Grid Grid.Row="2" 
+              ColumnDefinitions="1*,2*,1*">
+
+            <!-- Grille de disposition des points de l'équipes 1-->
+            <Grid Grid.Column="0"
+                  ColumnDefinitions="1*,4*,1*">
+                <Border Grid.Column="1" Style="{StaticResource PointStyle}">
+                    <Label Text="0" FontSize="150" x:Name="lblPointEquipe1"/>
+                </Border>
+            </Grid>
+
+            <!--Grille de disposition des pénalités-->
+            <Grid Grid.Column="1"
+                  RowDefinitions="*,*,*"
+                  ColumnDefinitions="*,*"
+                  Padding="10">
+
+                <!--Conteneur de la pénalité 1 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="0"
+                                     HorizontalOptions="Center">
+                    <HorizontalStackLayout>
+                        <VerticalStackLayout IsVisible="False">
+                            <Border Style="{StaticResource ChronometreStyle}">
+                                <Label Text="00:00"
+                                       x:Name="lblPenalite1"/>
+                            </Border>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 2 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="0"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite2"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 3 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="1"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite3"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 4 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="1"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite4"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 5 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="2"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite5"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 6 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="2"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout IsVisible="False">
+                        <Border Style="{StaticResource ChronometreStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite6"/>
+                        </Border>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+
+            </Grid>
+
+            <!-- Grille de disposition des points de l'équipes 2-->
+            <Grid Grid.Column="2"
+                ColumnDefinitions="1*,4*,1*">
+                <Border Grid.Column="1" Style="{StaticResource PointStyle}">
+                    <Label Text="0" FontSize="150" x:Name="lblPointEquipe2"/>
+                </Border>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</ContentPage>
