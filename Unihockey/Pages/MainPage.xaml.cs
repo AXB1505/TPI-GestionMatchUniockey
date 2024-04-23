@@ -1,4 +1,4 @@
-﻿namespace Unihockey
+﻿namespace Unihockey.Pages
 {
     public partial class MainPage : ContentPage
     {
