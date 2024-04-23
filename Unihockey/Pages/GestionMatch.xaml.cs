@@ -29,12 +29,36 @@ public partial class GestionMatch : ContentPage
     // Instanciation de la fenêtre d'affichage du match
     Window affichageMatch = new Window(new AffichageMatch());
 
+    // Instanciation des listes de labels et de checkboxs pour le passage sur la fenêtre d'affichage du match
+    List<Label> labels = new List<Label>();
+    List<CheckBox> checkboxs = new List<CheckBox>();
+
     public GestionMatch(int periode, int dureePeriode)
 	{
         InitializeComponent();
         // Initialisation du chronomètre principal selon la durée de la période et le nombre de la période reçu en paramètre
         chrPrincipal = new Chronometre(dureePeriode, 0, periode);
         lblChrPrincipal.Text = chrPrincipal.getTempsReset();
+
+        // Ajout des labels dans les listes de labels pour le passage sur la fenêtre d'affichage du match
+        labels.Add(lblChrPrincipal);
+        labels.Add(lblPenalite1);
+        labels.Add(lblPenalite2);
+        labels.Add(lblPenalite3);
+        labels.Add(lblPenalite4);
+        labels.Add(lblPenalite5);
+        labels.Add(lblPenalite6);
+        labels.Add(lblPointEquipe1);
+        labels.Add(lblPointEquipe2);
+
+        // Ajout des checkboxs dans la liste de checkboxs pour le passage sur la fenêtre d'affichage du match
+        checkboxs.Add(cbxPenalite1);
+        checkboxs.Add(cbxPenalite2);
+        checkboxs.Add(cbxPenalite3);
+        checkboxs.Add(cbxPenalite4);
+        checkboxs.Add(cbxPenalite5);
+        checkboxs.Add(cbxPenalite6);
+
     }
 
 
@@ -115,6 +139,8 @@ public partial class GestionMatch : ContentPage
 
     private void OnbtnAffichageSecondEcranClicked(object sender, EventArgs e)
     {
+        // Ouverture de la fenêtre d'affichage du match et transmission des labels et checkboxs pour l'affichage
+        affichageMatch = new Window(new AffichageMatch(labels, checkboxs));
         Application.Current.OpenWindow(affichageMatch);
     }
 
@@ -526,8 +552,8 @@ public partial class GestionMatch : ContentPage
             lblPenalite5.Text = chrPenalite5.GetTempsRestant();
             lblPenalite6.Text = chrPenalite6.GetTempsRestant();
 
+
             /*
-            affichageMatch.FindByName<Label>("lblChrPrincipal").Text = chrPrincipal.GetTempsRestant();
             affichageMatch.FindByName<Label>("lblPenalite1").Text = chrPenalite1.GetTempsRestant();
             affichageMatch.FindByName<Label>("lblPenalite2").Text = chrPenalite2.GetTempsRestant();
             affichageMatch.FindByName<Label>("lblPenalite3").Text = chrPenalite3.GetTempsRestant();

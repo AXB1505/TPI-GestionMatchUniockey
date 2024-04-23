@@ -96,7 +96,8 @@
                                 <Button Text="Stop"/>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
-                        <CheckBox IsChecked="false"
+                        <CheckBox x:Name="cbxPenalite1"
+                                  IsChecked="false"
                                   CheckedChanged="OncbxPenalite1VisibleChecked"/>
                     </HorizontalStackLayout>
                 </HorizontalStackLayout>
@@ -118,7 +119,8 @@
                             <Button Text="Stop"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
-                    <CheckBox IsChecked="false"
+                    <CheckBox x:Name="cbxPenalite2"
+                              IsChecked="false"
                               CheckedChanged="OncbxPenalite2VisibleChecked"/>
                 </HorizontalStackLayout>
                 
@@ -139,7 +141,8 @@
                             <Button Text="Stop"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
-                    <CheckBox IsChecked="false"
+                    <CheckBox x:Name="cbxPenalite3"
+                              IsChecked="false"
                               CheckedChanged="OncbxPenalite3VisibleChecked"/>
                 </HorizontalStackLayout>
                 
@@ -160,7 +163,8 @@
                             <Button Text="Stop"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
-                    <CheckBox IsChecked="false"
+                    <CheckBox x:Name="cbxPenalite4"
+                              IsChecked="false"
                               CheckedChanged="OncbxPenalite4VisibleChecked"/>
                 </HorizontalStackLayout>
                 
@@ -181,7 +185,8 @@
                             <Button Text="Stop"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
-                    <CheckBox IsChecked="false"
+                    <CheckBox x:Name="cbxPenalite5"
+                              IsChecked="false"
                               CheckedChanged="OncbxPenalite5VisibleChecked"/>
                 </HorizontalStackLayout>
                 
@@ -202,7 +207,8 @@
                             <Button Text="Stop"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
-                    <CheckBox IsChecked="false"
+                    <CheckBox x:Name="cbxPenalite6"
+                              IsChecked="false"
                               CheckedChanged="OncbxPenalite6VisibleChecked"/>
                 </HorizontalStackLayout>
 

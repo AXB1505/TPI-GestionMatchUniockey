@@ -53,7 +53,8 @@
                 <HorizontalStackLayout Grid.Column="0" Grid.Row="0"
                                      HorizontalOptions="Center">
                     <HorizontalStackLayout>
-                        <VerticalStackLayout IsVisible="False">
+                        <VerticalStackLayout x:Name="boxPenalite1"
+                                             IsVisible="False">
                             <Border Style="{StaticResource ChronometreStyle}">
                                 <Label Text="00:00"
                                        x:Name="lblPenalite1"/>
@@ -65,7 +66,8 @@
                 <!--Conteneur de la pénalité 2 avec les boutons d'action du chronomètre-->
                 <HorizontalStackLayout Grid.Column="1" Grid.Row="0"
                                      HorizontalOptions="Center">
-                    <VerticalStackLayout IsVisible="False">
+                    <VerticalStackLayout x:Name="boxPenalite2"
+                                         IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
                                    x:Name="lblPenalite2"/>
@@ -76,7 +78,8 @@
                 <!--Conteneur de la pénalité 3 avec les boutons d'action du chronomètre-->
                 <HorizontalStackLayout Grid.Column="0" Grid.Row="1"
                                      HorizontalOptions="Center">
-                    <VerticalStackLayout IsVisible="False">
+                    <VerticalStackLayout x:Name="boxPenalite3"
+                                         IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
                                    x:Name="lblPenalite3"/>
@@ -87,7 +90,8 @@
                 <!--Conteneur de la pénalité 4 avec les boutons d'action du chronomètre-->
                 <HorizontalStackLayout Grid.Column="1" Grid.Row="1"
                                      HorizontalOptions="Center">
-                    <VerticalStackLayout IsVisible="False">
+                    <VerticalStackLayout x:Name="boxPenalite4"
+                                         IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
                                    x:Name="lblPenalite4"/>
@@ -98,7 +102,8 @@
                 <!--Conteneur de la pénalité 5 avec les boutons d'action du chronomètre-->
                 <HorizontalStackLayout Grid.Column="0" Grid.Row="2"
                                      HorizontalOptions="Center">
-                    <VerticalStackLayout IsVisible="False">
+                    <VerticalStackLayout x:Name="boxPenalite5"
+                                         IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
                                    x:Name="lblPenalite5"/>
@@ -109,7 +114,8 @@
                 <!--Conteneur de la pénalité 6 avec les boutons d'action du chronomètre-->
                 <HorizontalStackLayout Grid.Column="1" Grid.Row="2"
                                      HorizontalOptions="Center">
-                    <VerticalStackLayout IsVisible="False">
+                    <VerticalStackLayout x:Name="boxPenalite6"
+                                         IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
                                    x:Name="lblPenalite6"/>
