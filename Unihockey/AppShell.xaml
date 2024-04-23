@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Unihockey.Pages"
     Shell.FlyoutBehavior="Disabled"
     Title="Unihockey">
-    
+
     <TabBar>
         <Tab Title="Accueil">
             <ShellContent

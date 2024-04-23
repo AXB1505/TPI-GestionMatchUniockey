@@ -1,3 +1,4 @@
+using Microsoft.Maui.Platform;
 using System.ComponentModel.DataAnnotations.Schema;
 using Unihockey.Model;
 
@@ -5,8 +6,6 @@ namespace Unihockey.Pages;
 
 public partial class GestionMatch : ContentPage
 {
-    AffichageMatch affMatch = new AffichageMatch();
-
     // Instanciation de l'objet Match
     Match mMatch = new Match();
 
@@ -23,6 +22,9 @@ public partial class GestionMatch : ContentPage
     Chronometre chrPenalite4 = new Chronometre(0, 30, 1);
     Chronometre chrPenalite5 = new Chronometre(0, 30, 1);
     Chronometre chrPenalite6 = new Chronometre(0, 30, 1);
+
+    // Instanciation de la fenêtre d'affichage du match
+    Window affichageMatch = new Window(new AffichageMatch());
 
     public GestionMatch(int periode, int dureePeriode)
 	{
@@ -83,12 +85,34 @@ public partial class GestionMatch : ContentPage
         chrPenalite6.Pause();
     }
 
+    private async void OnbtnStopClicked(object sender, EventArgs e)
+    {
+        // Demande de confirmation pour l'arrêt du match et vérification de la réponse
+        bool rep = await DisplayAlert("Arrêt du Match", "Êtes-vous sûr de vouloir arrêter le match ?\n" +
+            "Ceci entrainera l'enregistrement des résultats et vous ne pourez plus retourner en arrière.", "Oui", "Non");
+        if (rep)
+        {
+            // Enregistrement des résultats
+                // A faire
+
+            // Redirection sur une nouvelle page de gestion de match pour un nouveau match (demandé par le client)
+            await Navigation.PushAsync(new GestionMatch(chrPrincipal.getNombrePeriode(), chrPrincipal.getMinutesPeriode()));
+            // Supression de la page active de gestion du match
+            Navigation.RemovePage(this);
+        }
+    }
+
     // Méthode pour le changement de chronomètrage entre croissant et décroissant
     private void OnCbxCroissantCheckedChanged(object sender, EventArgs e)
     {
         CheckBox cbx = (CheckBox)sender;
         chrPrincipal.setCroissant(cbx.IsChecked);
         lblChrPrincipal.Text = chrPrincipal.GetTempsRestant();
+    }
+
+    private void OnbtnAffichageSecondEcranClicked(object sender, EventArgs e)
+    {
+        Application.Current.OpenWindow(affichageMatch);
     }
 
 
@@ -238,23 +262,14 @@ public partial class GestionMatch : ContentPage
     {
         chrPenalite6.Pause();
     }
-    private void OncbxPenaliteVisibleChecked(object sender, EventArgs e)
+    private void OncbxPenalite1VisibleChecked(object sender, EventArgs e)
     {
         CheckBox cbx = (CheckBox)sender;
-        HorizontalStackLayout hslParent = (HorizontalStackLayout)cbx.Parent;
-        VerticalStackLayout boxPenalite = (VerticalStackLayout)hslParent.Children.First();
-
         if (cbx.IsChecked)
         {
             // Affiche la penalité
-            boxPenalite.IsVisible = true;
-            HorizontalStackLayout vslParent1 = (HorizontalStackLayout)cbx.Parent;
-            VerticalStackLayout child1 = (VerticalStackLayout)vslParent1.Children.First();
-            Border borderPenalite = (Border)child1.Children.First();
+            .IsVisible = true;
 
-            Label lblPenalite = (Label)borderPenalite.Content;
-
-            lblPenalite.Text = chrPenalite1.getTempsReset();
         }
         else
         {
@@ -327,8 +342,50 @@ public partial class GestionMatch : ContentPage
             lblPenalite5.Text = chrPenalite5.GetTempsRestant();
             lblPenalite6.Text = chrPenalite6.GetTempsRestant();
 
-            affMatch.Layout.lblChronoPrincipal.Text = chrPrincipal.GetTempsRestant();
+            /*
+            affichageMatch.FindByName<Label>("lblChrPrincipal").Text = chrPrincipal.GetTempsRestant();
+            affichageMatch.FindByName<Label>("lblPenalite1").Text = chrPenalite1.GetTempsRestant();
+            affichageMatch.FindByName<Label>("lblPenalite2").Text = chrPenalite2.GetTempsRestant();
+            affichageMatch.FindByName<Label>("lblPenalite3").Text = chrPenalite3.GetTempsRestant();
+            affichageMatch.FindByName<Label>("lblPenalite4").Text = chrPenalite4.GetTempsRestant();
+            affichageMatch.FindByName<Label>("lblPenalite5").Text = chrPenalite5.GetTempsRestant();
+            affichageMatch.FindByName<Label>("lblPenalite6").Text = chrPenalite6.GetTempsRestant();
+            */
             await Task.Delay(25);
         }
     }
+
+
+
+
+
+
+    /*
+     * Amélioration possible pour l'affichage des pénalités avec une méthode générique
+     * 
+    private void OncbxPenaliteVisibleChecked(object sender, EventArgs e)
+    {
+        CheckBox cbx = (CheckBox)sender;
+        HorizontalStackLayout hslParent = (HorizontalStackLayout)cbx.Parent;
+        VerticalStackLayout boxPenalite = (VerticalStackLayout)hslParent.Children.First();
+
+        if (cbx.IsChecked)
+        {
+            // Affiche la penalité
+            boxPenalite.IsVisible = true;
+            HorizontalStackLayout vslParent1 = (HorizontalStackLayout)cbx.Parent;
+            VerticalStackLayout child1 = (VerticalStackLayout)vslParent1.Children.First();
+            Border borderPenalite = (Border)child1.Children.First();
+
+            Label lblPenalite = (Label)borderPenalite.Content;
+
+            lblPenalite.Text = chrPenalite1.getTempsReset();
+        }
+        else
+        {
+            // Cache la penalité
+            boxPenalite.IsVisible = false;
+        }
+    }
+    */
 }

@@ -38,6 +38,15 @@ namespace Unihockey.Model
             dureeActuel = dureePeriode;
         }
 
+        public int getNombrePeriode()
+        {
+            return nombrePeriode;
+        }
+        public int getMinutesPeriode()
+        {
+            return dureePeriode.Minutes;
+        }
+
         // Méthodes pour la récupération du status du chrono
         public bool getStatus()
         {

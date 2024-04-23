@@ -34,7 +34,8 @@
                         Text="Pause"
                         Clicked="OnbtnPauseClicked"/>
                 <Button x:Name="btnStop"
-                        Text="Stop"/>
+                        Text="Stop"
+                        Clicked="OnbtnStopClicked"/>
                 <Border>
                     <VerticalStackLayout HorizontalOptions="Center">
                         <CheckBox x:Name="cbxCroissant"
@@ -43,6 +44,8 @@
                                FontSize="20"/>
                     </VerticalStackLayout>
                 </Border>
+                <Button Text="Afficher"
+                        Clicked="OnbtnAffichageSecondEcranClicked"/>
 
             </HorizontalStackLayout>
         </Grid>
@@ -93,7 +96,7 @@
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                         <CheckBox IsChecked="false"
-                                  CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                                  CheckedChanged="OncbxPenalite1VisibleChecked"/>
                     </HorizontalStackLayout>
                 </HorizontalStackLayout>
 
@@ -114,7 +117,7 @@
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                     <CheckBox IsChecked="false"
-                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                              CheckedChanged="OncbxPenalite2VisibleChecked"/>
                 </HorizontalStackLayout>
                 
                 <!--Conteneur de la pénalité 3 avec les boutons d'action du chronomètre-->
@@ -134,7 +137,7 @@
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                     <CheckBox IsChecked="false"
-                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                              CheckedChanged="OncbxPenalite3VisibleChecked"/>
                 </HorizontalStackLayout>
                 
                 <!--Conteneur de la pénalité 4 avec les boutons d'action du chronomètre-->
@@ -154,7 +157,7 @@
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                     <CheckBox IsChecked="false"
-                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                              CheckedChanged="OncbxPenalite4VisibleChecked"/>
                 </HorizontalStackLayout>
                 
                 <!--Conteneur de la pénalité 5 avec les boutons d'action du chronomètre-->
@@ -174,7 +177,7 @@
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                     <CheckBox IsChecked="false"
-                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                              CheckedChanged="OncbxPenalite5VisibleChecked"/>
                 </HorizontalStackLayout>
                 
                 <!--Conteneur de la pénalité 6 avec les boutons d'action du chronomètre-->
@@ -194,7 +197,7 @@
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                     <CheckBox IsChecked="false"
-                              CheckedChanged="OncbxPenaliteVisibleChecked"/>
+                              CheckedChanged="OncbxPenalite6VisibleChecked"/>
                 </HorizontalStackLayout>
 
             </Grid>
