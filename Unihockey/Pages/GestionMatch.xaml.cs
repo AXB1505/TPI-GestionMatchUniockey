@@ -1,5 +1,8 @@
 using Microsoft.Maui.Platform;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using System.Threading.Channels;
 using Unihockey.Model;
 
 namespace Unihockey.Pages;
@@ -16,12 +19,12 @@ public partial class GestionMatch : ContentPage
     // Instanciation des chronomètres
     Chronometre chrPrincipal = new Chronometre();
 
-    Chronometre chrPenalite1 = new Chronometre(0, 30, 1);
-    Chronometre chrPenalite2 = new Chronometre(0, 30, 1);
-    Chronometre chrPenalite3 = new Chronometre(0, 30, 1);
-    Chronometre chrPenalite4 = new Chronometre(0, 30, 1);
-    Chronometre chrPenalite5 = new Chronometre(0, 30, 1);
-    Chronometre chrPenalite6 = new Chronometre(0, 30, 1);
+    Chronometre chrPenalite1 = new Chronometre();
+    Chronometre chrPenalite2 = new Chronometre();
+    Chronometre chrPenalite3 = new Chronometre();
+    Chronometre chrPenalite4 = new Chronometre();
+    Chronometre chrPenalite5 = new Chronometre();
+    Chronometre chrPenalite6 = new Chronometre();
 
     // Instanciation de la fenêtre d'affichage du match
     Window affichageMatch = new Window(new AffichageMatch());
@@ -131,41 +134,6 @@ public partial class GestionMatch : ContentPage
                 chrPenalite1.Start();
             }
         }
-
-        /*
-         * Pour de l'amélioration et l'utilisation d'une seule fonction pour chaque boutons de pénalité
-         * 
-        Button btn = (Button)sender;
-        HorizontalStackLayout hslParent1 = (HorizontalStackLayout)btn.Parent;
-        VerticalStackLayout vslParent2 = (VerticalStackLayout)hslParent1.Parent;
-        Border borderPenalite = (Border)vslParent2.Children.First();
-
-        Label lblPenalite = (Label)borderPenalite.Content;
-
-        int iNumeroPenalite = int.Parse(lblPenalite.Text);
-
-        switch (iNumeroPenalite)
-        {
-            case 1:
-                chrPenalite1.Start();
-                break;
-            case 2:
-                chrPenalite2.Start();
-                break;
-            case 3:
-                chrPenalite3.Start();
-                break;
-            case 4:
-                chrPenalite4.Start();
-                break;
-            case 5:
-                chrPenalite5.Start();
-                break;
-            case 6:
-                chrPenalite6.Start();
-                break;
-        }
-        */
     }
 
     // Méthode de pause du chronomètre de pénalité numéro 1
@@ -262,25 +230,241 @@ public partial class GestionMatch : ContentPage
     {
         chrPenalite6.Pause();
     }
-    private void OncbxPenalite1VisibleChecked(object sender, EventArgs e)
+
+
+    // Méthodes pour afficher ou caché les pénalités (semblables)
+    // Méthode pour afficher ou cacher la pénalité 1 asynchrone pour le choix de la durée de la pénalité
+    private async void OncbxPenalite1VisibleChecked(object sender, EventArgs e)
+    {
+        // Récupération de la checkbox
+        CheckBox cbx = (CheckBox)sender;
+
+        // Check si la checkbox est cochée
+        if (cbx.IsChecked)
+        {
+            // Affiche la penalité
+            boxPenalite1.IsVisible = true;
+            // Demande de choix de la durée de la pénalité
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            // Switch pour le choix de la durée de la pénalité
+            switch (rep)
+            {
+                case "2min":
+                    chrPenalite1 = new Chronometre(2, 0, 1);
+                    break;
+                case "5min":
+                    chrPenalite1 = new Chronometre(5, 0, 1);
+                    break;
+                case "10min":
+                    chrPenalite1 = new Chronometre(10, 0, 1);
+                    break;
+                case "Cancel":
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+                case null:
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+            }
+            lblPenalite1.Text = chrPenalite1.GetTempsRestant();
+        }
+        else
+        {
+            // Cache la penalité
+            boxPenalite1.IsVisible = false;
+        }
+    }
+
+    // Méthode pour afficher ou cacher la pénalité 2
+    private async void OncbxPenalite2VisibleChecked(object sender, EventArgs e)
     {
         CheckBox cbx = (CheckBox)sender;
         if (cbx.IsChecked)
         {
             // Affiche la penalité
-            .IsVisible = true;
-
+            boxPenalite2.IsVisible = true;
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            switch (rep)
+            {
+                case "2min":
+                    chrPenalite2 = new Chronometre(2, 0, 1);
+                    break;
+                case "5min":
+                    chrPenalite2 = new Chronometre(5, 0, 1);
+                    break;
+                case "10min":
+                    chrPenalite2 = new Chronometre(10, 0, 1);
+                    break;
+                case "Cancel":
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+                case null:
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+            }
+            lblPenalite2.Text = chrPenalite2.GetTempsRestant();
         }
         else
         {
             // Cache la penalité
-            boxPenalite.IsVisible = false;
+            boxPenalite2.IsVisible = false;
         }
     }
 
+    // Méthode pour afficher ou cacher la pénalité 3
+    private async void OncbxPenalite3VisibleChecked(object sender, EventArgs e)
+    {
+        CheckBox cbx = (CheckBox)sender;
+        if (cbx.IsChecked)
+        {
+            // Affiche la penalité
+            boxPenalite3.IsVisible = true;
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            switch (rep)
+            {
+                case "2min":
+                    chrPenalite3 = new Chronometre(2, 0, 1);
+                    break;
+                case "5min":
+                    chrPenalite3 = new Chronometre(5, 0, 1);
+                    break;
+                case "10min":
+                    chrPenalite3 = new Chronometre(10, 0, 1);
+                    break;
+                case "Cancel":
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+                case null:
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+            }
+            lblPenalite3.Text = chrPenalite3.GetTempsRestant();
+        }
+        else
+        {
+            // Cache la penalité
+            boxPenalite3.IsVisible = false;
+        }   
+    }
 
+    // Méthode pour afficher ou cacher la pénalité 4
+    private async void OncbxPenalite4VisibleChecked(object sender, EventArgs e)
+    {
+        CheckBox cbx = (CheckBox)sender;
+        if (cbx.IsChecked)
+        {
+            // Affiche la penalité
+            boxPenalite4.IsVisible = true;
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            switch (rep)
+            {
+                case "2min":
+                    chrPenalite4 = new Chronometre(2, 0, 1);
+                    break;
+                case "5min":
+                    chrPenalite4 = new Chronometre(5, 0, 1);
+                    break;
+                case "10min":
+                    chrPenalite4 = new Chronometre(10, 0, 1);
+                    break;
+                case "Cancel":
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+                case null:
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+            }
+            lblPenalite4.Text = chrPenalite4.GetTempsRestant();
+        }
+        else
+        {
+            // Cache la penalité
+            boxPenalite4.IsVisible = false;
+        }
+    }
 
+    // Méthode pour afficher ou cacher la pénalité 5
+    private async void OncbxPenalite5VisibleChecked(object sender, EventArgs e)
+    {
+        CheckBox cbx = (CheckBox)sender;
+        if (cbx.IsChecked)
+        {
+            // Affiche la penalité
+            boxPenalite5.IsVisible = true;
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            switch (rep)
+            {
+                case "2min":
+                    chrPenalite5 = new Chronometre(2, 0, 1);
+                    break;
+                case "5min":
+                    chrPenalite5 = new Chronometre(5, 0, 1);
+                    break;
+                case "10min":
+                    chrPenalite5 = new Chronometre(10, 0, 1);
+                    break;
+                case "Cancel":
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+                case null:
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+            }
+            lblPenalite5.Text = chrPenalite5.GetTempsRestant();
+        }
+        else
+        {
+            // Cache la penalité
+            boxPenalite5.IsVisible = false;
+        }
+    }
 
+    // Méthode pour afficher ou cacher la pénalité 6
+    private async void OncbxPenalite6VisibleChecked(object sender, EventArgs e)
+    {
+        CheckBox cbx = (CheckBox)sender;
+        if (cbx.IsChecked)
+        {
+            // Affiche la penalité
+            boxPenalite6.IsVisible = true;
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            switch (rep)
+            {
+                case "2min":
+                    chrPenalite6 = new Chronometre(2, 0, 1);
+                    break;
+                case "5min":
+                    chrPenalite6 = new Chronometre(5, 0, 1);
+                    break;
+                case "10min":
+                    chrPenalite6 = new Chronometre(10, 0, 1);
+                    break;
+                case "Cancel":
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+                case null:
+                    cbx.IsChecked = false;
+                    boxPenalite1.IsVisible = false;
+                    break;
+            }
+            lblPenalite6.Text = chrPenalite6.GetTempsRestant();
+        }
+        else
+        {
+            // Cache la penalité
+            boxPenalite6.IsVisible = false;
+        }
+    }
 
 
 
@@ -380,6 +564,45 @@ public partial class GestionMatch : ContentPage
             Label lblPenalite = (Label)borderPenalite.Content;
 
             lblPenalite.Text = chrPenalite1.getTempsReset();
+        }
+        else
+        {
+            // Cache la penalité
+            boxPenalite.IsVisible = false;
+        }
+    }
+    */
+
+
+    /*
+     * Amélioration possible pour l'affichage des pénalités avec une méthode générique
+     *
+    private async void ChoixDureePenalite(CheckBox cbxPenlite, Chronometre chronometrePenalite, Label labelPenalite, VerticalStackLayout boxPenalite)
+    {
+        if (cbxPenlite.IsChecked)
+        {
+            // Affiche la penalité
+            boxPenalite.IsVisible = true;
+            // Demande de choix de la durée de la pénalité
+            string rep = await DisplayActionSheet("Veuillez choisir la durée de la pénalité", "Cancel", null, "2min", "5min", "10min");
+            // Switch pour le choix de la durée de la pénalité
+            switch (rep)
+            {
+                case "2min":
+                    chronometrePenalite = new Chronometre(2, 0, 1);
+                    break;
+                case "5min":
+                    chronometrePenalite = new Chronometre(5, 0, 1);
+                    break;
+                case "10min":
+                    chronometrePenalite = new Chronometre(10, 0, 1);
+                    break;
+                case "Cancel":
+                    cbxPenlite.IsChecked = false;
+                    chronometrePenalite = new Chronometre(10, 0, 1);
+                    break;
+            }
+            labelPenalite.Text = chronometrePenalite.GetTempsRestant();
         }
         else
         {
