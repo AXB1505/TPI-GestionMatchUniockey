@@ -125,7 +125,7 @@ namespace Unihockey.Model
                 tempsRestant = dureeActuel - chrono.Elapsed;
             }
 
-            // Verification que le temps est écoulé (check si tempsRestant est plus grande que dureeActuel et non égal car manque de précision au millième de secondes)
+            // Verification que le temps est écoulé
             if (chrono.Elapsed >= dureeActuel)
             {
                 // Si le temps est écoulé, on arrête le chronomètre et on le réinitialise
