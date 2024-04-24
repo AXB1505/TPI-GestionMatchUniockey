@@ -12,17 +12,26 @@ namespace Unihockey.Model
         // Constante pour le temps de pause
         private const int MINUTES_PAUSE = 5;
 
+        // Chronomètre utilisé pour mesurer le temps
+        private Stopwatch chrono = new Stopwatch();
 
-        // Variables à spécifier
-        public TimeSpan dureePeriode;
+        // Variables à spécifier dans le constructeur
+
+        // Durée de chaque période de jeu
+        private TimeSpan dureePeriode;
+        // Nombre total de périodes
         private int nombrePeriode;
-        Stopwatch chrono = new Stopwatch();
-        bool estCroissant = false;
+        // Indiquation si le compteur est croissant ou décroissant
+        private bool estCroissant = false;
 
         // Variables à obtenir et afficher
+
+        // Durée actuelle du chronomètre pour la période actuelle ou la pause
         private TimeSpan dureeActuel;
+        // Temps restant du chronomètre
         private TimeSpan tempsRestant;
-        private string temps = "";
+        // Indique si le chronomètre est fini
+        private bool estFini = false;
 
         // Constructeurs par défaut
         public Chronometre()
@@ -30,7 +39,7 @@ namespace Unihockey.Model
 
         }
 
-        // Constructeur avec paramètres
+        // Constructeur avec paramètres 
         public Chronometre(int periodeMinutes, int periodeSecondes, int periode)
         {
             dureePeriode = new TimeSpan(0, periodeMinutes, periodeSecondes);
@@ -38,28 +47,59 @@ namespace Unihockey.Model
             dureeActuel = dureePeriode;
         }
 
-        public int getNombrePeriode()
+        // Méthodes pour le démarrage du chrononomètre
+        public void Start()
         {
-            return nombrePeriode;
-        }
-        public int getMinutesPeriode()
-        {
-            return dureePeriode.Minutes;
+            if (estFini == false && chrono.IsRunning == false)
+            {
+                chrono.Start();
+            }
+            return;
+
         }
 
-        // Méthodes pour la récupération du status du chrono
-        public bool getStatus()
+        // Méthodes pour mettre en pause le chrononomètre
+        public void Pause()
         {
-            return chrono.IsRunning;
+            if (chrono.IsRunning)
+            {
+                chrono.Stop();
+            }
+            return;
         }
 
-        // Méthodes pour la fixation du mode de décompte
+        // à revoir
+        public void Stop()
+        {
+            chrono.Reset();
+            estFini = true;
+        }
+
+        // Méthode pour définir si le compteur est croissant ou non
         public void setCroissant(bool estCroissant)
         {
             this.estCroissant = estCroissant;
         }
 
-        // Méthodes pour la récupération de la duree de la période
+        // Méthode pour obtenir le nombre de périodes
+        public int getNombrePeriode()
+        {
+            return nombrePeriode;
+        }
+
+        // Méthode pour obtenir la durée en minutes de chaque période
+        public int getMinutesPeriode()
+        {
+            return dureePeriode.Minutes;
+        }
+
+        // Méthode pour obtenir le statut du chronomètre (en cours ou non)
+        public bool getStatus()
+        {
+            return chrono.IsRunning;
+        }
+
+        // Méthode pour obtenir le temps formatté après un reset
         public string getTempsReset()
         {
             if (estCroissant)
@@ -72,9 +112,10 @@ namespace Unihockey.Model
             }
         }
 
-        // Méthodes pour la récupération du temps restant
+        // Méthodes pour la récupération du temps restant en string
         public string GetTempsRestant()
         {
+            // Vérification que le chronomètre est croissant ou non et calcule le temps restant en conséquence
             if (estCroissant)
             {
                 tempsRestant = chrono.Elapsed;
@@ -84,48 +125,33 @@ namespace Unihockey.Model
                 tempsRestant = dureeActuel - chrono.Elapsed;
             }
 
-            // Verification si le temps est écoulé (check si tempsRestant est plus grande que dureeActuel et non égal car manque de précision au millième de secondes)
+            // Verification que le temps est écoulé (check si tempsRestant est plus grande que dureeActuel et non égal car manque de précision au millième de secondes)
             if (chrono.Elapsed >= dureeActuel)
             {
+                // Si le temps est écoulé, on arrête le chronomètre et on le réinitialise
                 chrono.Reset();
+                // Verification qu'il y ait 2 périodes
                 if (nombrePeriode == 2)
                 {
+                    // Si il y a 2 périodes le nombre de périodes passe à 0 (pour la pause)
                     nombrePeriode = 0;
+                    // Fixation de la durée actuelle à la durée de la pause
                     dureeActuel = new TimeSpan(0, 0, MINUTES_PAUSE);
                 }
+                // Verification si on est en pause
                 else if (nombrePeriode == 0)
                 {
+                    // Si il y a 0 périodes le nombre de périodes passe à 1 (pour la dernière période)
                     nombrePeriode = 1;
+                    // Fixation de la durée actuelle à la durée de la période
                     dureeActuel = dureePeriode;
                 }
-
+                // Retour du temps restant réinitialiser
                 return getTempsReset();
             }
 
-            temps = tempsRestant.ToString(@"mm\:ss");
-
-            return temps;
-        }
-
-        // Méthodes pour le démarrage du chrono
-        public void Start()
-        {
-            if (chrono.IsRunning)
-            {
-                return;
-            }
-
-            chrono.Start();
-        }
-
-        // Méthodes pour l'arrêt du chrono
-        public void Pause()
-        {
-            if (chrono.IsRunning)
-            {
-                chrono.Stop();
-            }
-            return;
+            // Retour du temps restant
+            return tempsRestant.ToString(@"mm\:ss");
         }
     }
 }
