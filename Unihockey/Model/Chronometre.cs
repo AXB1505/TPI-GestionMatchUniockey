@@ -50,7 +50,7 @@ namespace Unihockey.Model
         // Méthodes pour le démarrage du chrononomètre
         public void Start()
         {
-            if (estFini == false && chrono.IsRunning == false)
+            if (chrono.IsRunning == false)
             {
                 chrono.Start();
             }
@@ -68,11 +68,10 @@ namespace Unihockey.Model
             return;
         }
 
-        // à revoir
+        // Méthodes pour réinitialiser le chrononomètre
         public void Stop()
         {
             chrono.Reset();
-            estFini = true;
         }
 
         // Méthode pour définir si le compteur est croissant ou non
@@ -112,6 +111,12 @@ namespace Unihockey.Model
             }
         }
 
+        // Méthode pour savoir si le chronomètre a fini
+        public bool getEstFini()
+        {
+            return estFini;
+        }
+
         // Méthodes pour la récupération du temps restant en string
         public string GetTempsRestant()
         {
@@ -136,7 +141,7 @@ namespace Unihockey.Model
                     // Si il y a 2 périodes le nombre de périodes passe à 0 (pour la pause)
                     nombrePeriode = 0;
                     // Fixation de la durée actuelle à la durée de la pause
-                    dureeActuel = new TimeSpan(0, 0, MINUTES_PAUSE);
+                    dureeActuel = new TimeSpan(0, MINUTES_PAUSE, 0);
                 }
                 // Verification si on est en pause
                 else if (nombrePeriode == 0)
@@ -145,6 +150,12 @@ namespace Unihockey.Model
                     nombrePeriode = 1;
                     // Fixation de la durée actuelle à la durée de la période
                     dureeActuel = dureePeriode;
+                }
+                // Verification si on est à la dernière période
+                else if (nombrePeriode == 1)
+                {
+                    // Si il y a 1 période le chronomètre est fini (pour le chronomètre principal)
+                    estFini = true;
                 }
                 // Retour du temps restant réinitialiser
                 return getTempsReset();

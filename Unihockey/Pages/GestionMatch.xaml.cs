@@ -12,6 +12,9 @@ public partial class GestionMatch : ContentPage
     // Instanciation de l'objet Match
     Match mMatch = new Match();
 
+    // Variables de contrôle que le match est terminé
+    bool bMatchFini = false;
+
     // Instantiation des points des équipes
     int iPointsEquipe1;
     int iPointsEquipe2;
@@ -59,6 +62,8 @@ public partial class GestionMatch : ContentPage
         checkboxs.Add(cbxPenalite5);
         checkboxs.Add(cbxPenalite6);
 
+        // Lancement de la fonction asynchrone pour la mise à jour des labels des chronomètres
+        UpdateLabels();
     }
 
 
@@ -68,35 +73,36 @@ public partial class GestionMatch : ContentPage
     // Méthode pour démarrer le chronomètre principal
     private void OnbtnPlayClicked(object sender, EventArgs e)
     {
-        chrPrincipal.Start();
+        if (chrPrincipal.getEstFini() == false)
+        {
+            chrPrincipal.Start();
 
-        // Check si la pénalité est en cours et démarrage du chronomètre de pénalité si nécessaire pour chaque pénalité
-        if(chrPenalite1.getTempsReset() != chrPenalite1.GetTempsRestant())
-        {
-            chrPenalite1.Start();
+            // Check si la pénalité est en cours et démarrage du chronomètre de pénalité si nécessaire pour chaque pénalité
+            if (chrPenalite1.getTempsReset() != chrPenalite1.GetTempsRestant())
+            {
+                chrPenalite1.Start();
+            }
+            if (chrPenalite2.getTempsReset() != chrPenalite2.GetTempsRestant())
+            {
+                chrPenalite2.Start();
+            }
+            if (chrPenalite3.getTempsReset() != chrPenalite3.GetTempsRestant())
+            {
+                chrPenalite3.Start();
+            }
+            if (chrPenalite4.getTempsReset() != chrPenalite4.GetTempsRestant())
+            {
+                chrPenalite4.Start();
+            }
+            if (chrPenalite5.getTempsReset() != chrPenalite5.GetTempsRestant())
+            {
+                chrPenalite5.Start();
+            }
+            if (chrPenalite6.getTempsReset() != chrPenalite6.GetTempsRestant())
+            {
+                chrPenalite6.Start();
+            }
         }
-        if (chrPenalite2.getTempsReset() != chrPenalite2.GetTempsRestant())
-        {
-            chrPenalite2.Start();
-        }
-        if (chrPenalite3.getTempsReset() != chrPenalite3.GetTempsRestant())
-        {
-            chrPenalite3.Start();
-        }
-        if (chrPenalite4.getTempsReset() != chrPenalite4.GetTempsRestant())
-        {
-            chrPenalite4.Start();
-        }
-        if (chrPenalite5.getTempsReset() != chrPenalite5.GetTempsRestant())
-        {
-            chrPenalite5.Start();
-        }
-        if (chrPenalite6.getTempsReset() != chrPenalite6.GetTempsRestant())
-        {
-            chrPenalite6.Start();
-        }
-
-        UpdateLabels();
     }
 
     // Méthode pour mettre en pause le chronomètre principal
@@ -155,10 +161,7 @@ public partial class GestionMatch : ContentPage
     {
         if (chrPrincipal.getStatus())
         {
-            if(chrPenalite1.getStatus() == false)
-            {
-                chrPenalite1.Start();
-            }
+            chrPenalite1.Start();
         }
     }
 
@@ -172,11 +175,8 @@ public partial class GestionMatch : ContentPage
     private void OnbtnStartPenalite2Clicked(object sender, EventArgs e)
     {
         if (chrPrincipal.getStatus())
-        {
-            if (chrPenalite2.getStatus() == false)
-            {
-                chrPenalite2.Start();
-            }
+        {            
+            chrPenalite2.Start();
         }
     }
     // Méthode de pause du chronomètre de pénalité numéro 2
@@ -190,10 +190,7 @@ public partial class GestionMatch : ContentPage
     {
         if (chrPrincipal.getStatus())
         {
-            if (chrPenalite3.getStatus() == false)
-            {
-                chrPenalite3.Start();
-            }
+            chrPenalite3.Start();
         }
     }
 
@@ -208,10 +205,7 @@ public partial class GestionMatch : ContentPage
     {
         if (chrPrincipal.getStatus())
         {
-            if (chrPenalite4.getStatus() == false)
-            {
-                chrPenalite4.Start();
-            }
+            chrPenalite4.Start();
         }
     }
 
@@ -226,10 +220,7 @@ public partial class GestionMatch : ContentPage
     {
         if (chrPrincipal.getStatus())
         {
-            if (chrPenalite5.getStatus() == false)
-            {
-                chrPenalite5.Start();
-            }
+            chrPenalite5.Start();
         }
     }
 
@@ -244,10 +235,7 @@ public partial class GestionMatch : ContentPage
     {
         if (chrPrincipal.getStatus())
         {
-            if (chrPenalite6.getStatus() == false)
-            {
-                chrPenalite6.Start();
-            }
+            chrPenalite6.Start();
         }
     }
 
