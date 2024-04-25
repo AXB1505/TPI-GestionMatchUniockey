@@ -246,7 +246,8 @@ public partial class GestionMatch : ContentPage
     }
 
 
-    // Méthodes pour afficher ou caché les pénalités (semblables)
+    // Méthodes pour afficher ou caché les pénalités
+
     // Méthode pour afficher ou cacher la pénalité 1 asynchrone pour le choix de la durée de la pénalité
     private async void OncbxPenalite1VisibleChecked(object sender, EventArgs e)
     {
@@ -260,6 +261,7 @@ public partial class GestionMatch : ContentPage
             boxPenalite1.IsVisible = true;
             // Demande de choix de la durée de la pénalité
             string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+
             // Switch pour le choix de la durée de la pénalité
             switch (rep)
             {
@@ -277,8 +279,7 @@ public partial class GestionMatch : ContentPage
                     boxPenalite1.IsVisible = false;
                     break;
                 case null:
-                    cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    cbx.IsChecked = true;
                     break;
             }
             lblPenalite1.Text = chrPenalite1.GetTempsRestant();
@@ -312,11 +313,10 @@ public partial class GestionMatch : ContentPage
                     break;
                 case "Cancel":
                     cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    boxPenalite2.IsVisible = false;
                     break;
                 case null:
-                    cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    cbx.IsChecked = true;
                     break;
             }
             lblPenalite2.Text = chrPenalite2.GetTempsRestant();
@@ -350,11 +350,10 @@ public partial class GestionMatch : ContentPage
                     break;
                 case "Cancel":
                     cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    boxPenalite3.IsVisible = false;
                     break;
                 case null:
-                    cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    cbx.IsChecked = true;
                     break;
             }
             lblPenalite3.Text = chrPenalite3.GetTempsRestant();
@@ -388,11 +387,10 @@ public partial class GestionMatch : ContentPage
                     break;
                 case "Cancel":
                     cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    boxPenalite4.IsVisible = false;
                     break;
                 case null:
-                    cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    cbx.IsChecked = true;
                     break;
             }
             lblPenalite4.Text = chrPenalite4.GetTempsRestant();
@@ -426,11 +424,10 @@ public partial class GestionMatch : ContentPage
                     break;
                 case "Cancel":
                     cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    boxPenalite5.IsVisible = false;
                     break;
                 case null:
-                    cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    cbx.IsChecked = true;
                     break;
             }
             lblPenalite5.Text = chrPenalite5.GetTempsRestant();
@@ -464,11 +461,10 @@ public partial class GestionMatch : ContentPage
                     break;
                 case "Cancel":
                     cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    boxPenalite5.IsVisible = false;
                     break;
                 case null:
-                    cbx.IsChecked = false;
-                    boxPenalite1.IsVisible = false;
+                    cbx.IsChecked = true;
                     break;
             }
             lblPenalite6.Text = chrPenalite6.GetTempsRestant();
