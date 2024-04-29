@@ -33,7 +33,7 @@ namespace Unihockey.Model
         // Indique si le chronomètre est fini
         private bool estFini = false;
 
-        // Constructeurs par défaut
+        // Constructeur vide
         public Chronometre()
         {
 

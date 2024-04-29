@@ -5,10 +5,7 @@ public partial class AffichageMatch : ContentPage
     // Instanciation des listes de labels et de checkbox pour les récupérer depuis la page de gestion du match
     List<Label> labelsParent = new List<Label>();
     List<CheckBox> checkBoxesParent = new List<CheckBox>();
-    public AffichageMatch()
-    {
-        InitializeComponent();
-    }
+
 	public AffichageMatch(List<Label> labels, List<CheckBox> checkBoxes)
 	{
 		InitializeComponent();

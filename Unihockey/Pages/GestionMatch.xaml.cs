@@ -28,15 +28,12 @@ public partial class GestionMatch : ContentPage
     private Chronometre chrPenalite5 = new Chronometre();
     private Chronometre chrPenalite6 = new Chronometre();
 
-    // Instanciation de la fenêtre d'affichage du match
-    private Window affichageMatch = new Window(new AffichageMatch());
+    // Instanciaition de la liste d'équipe
+    List<Equipe> listEquipes = new List<Equipe>(new Equipe().GetList());
 
     // Instanciation des listes de labels et de checkboxs pour le passage sur la fenêtre d'affichage du match
     private List<Label> labels = new List<Label>();
     private List<CheckBox> checkboxs = new List<CheckBox>();
-
-    // Instanciaition de la liste d'équipe
-    List<Equipe> listEquipes = new List<Equipe>(new Equipe().GetList());
 
     public GestionMatch(int periode, int dureePeriode)
 	{
@@ -67,6 +64,7 @@ public partial class GestionMatch : ContentPage
         // Lancement de la fonction asynchrone pour la mise à jour des labels des chronomètres
         UpdateLabels();
 
+        // Remplissage des listes déroulantes des équipes avec les équipes de la base de données
         pickEquipe1.ItemsSource = listEquipes;
         pickEquipe2.ItemsSource = listEquipes;
     }
@@ -152,7 +150,7 @@ public partial class GestionMatch : ContentPage
     private void OnbtnAffichageSecondEcranClicked(object sender, EventArgs e)
     {
         // Ouverture de la fenêtre d'affichage du match et transmission des labels et checkboxs pour l'affichage
-        affichageMatch = new Window(new AffichageMatch(labels, checkboxs));
+        Window affichageMatch = new Window(new AffichageMatch(labels, checkboxs));
         Application.Current.OpenWindow(affichageMatch);
     }
 
@@ -531,7 +529,7 @@ public partial class GestionMatch : ContentPage
 
 
 
-    // Fonction asynchrone pour mettre à jour les labels des chronomètres
+    // Méthode asynchrone pour la mise à jour des labels des chronomètres
     private async Task UpdateLabels()
     {
         while (true)
@@ -544,15 +542,6 @@ public partial class GestionMatch : ContentPage
             lblPenalite5.Text = chrPenalite5.GetTempsRestant();
             lblPenalite6.Text = chrPenalite6.GetTempsRestant();
 
-
-            /*
-            affichageMatch.FindByName<Label>("lblPenalite1").Text = chrPenalite1.GetTempsRestant();
-            affichageMatch.FindByName<Label>("lblPenalite2").Text = chrPenalite2.GetTempsRestant();
-            affichageMatch.FindByName<Label>("lblPenalite3").Text = chrPenalite3.GetTempsRestant();
-            affichageMatch.FindByName<Label>("lblPenalite4").Text = chrPenalite4.GetTempsRestant();
-            affichageMatch.FindByName<Label>("lblPenalite5").Text = chrPenalite5.GetTempsRestant();
-            affichageMatch.FindByName<Label>("lblPenalite6").Text = chrPenalite6.GetTempsRestant();
-            */
             await Task.Delay(25);
         }
     }
