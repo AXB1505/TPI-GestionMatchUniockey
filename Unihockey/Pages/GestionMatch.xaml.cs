@@ -10,31 +10,33 @@ namespace Unihockey.Pages;
 public partial class GestionMatch : ContentPage
 {
     // Instanciation de l'objet Match
-    Match mMatch = new Match();
+    private Match mMatch = new Match();
 
     // Variables de contrôle que le match est terminé
-    bool bMatchFini = false;
+    private bool bMatchFini = false;
 
     // Instantiation des points des équipes
-    int iPointsEquipe1;
-    int iPointsEquipe2;
+    private int iPointsEquipe1;
+    private int iPointsEquipe2;
 
     // Instanciation des chronomètres
-    Chronometre chrPrincipal = new Chronometre();
-
-    Chronometre chrPenalite1 = new Chronometre();
-    Chronometre chrPenalite2 = new Chronometre();
-    Chronometre chrPenalite3 = new Chronometre();
-    Chronometre chrPenalite4 = new Chronometre();
-    Chronometre chrPenalite5 = new Chronometre();
-    Chronometre chrPenalite6 = new Chronometre();
+    private Chronometre chrPrincipal = new Chronometre();
+    private Chronometre chrPenalite1 = new Chronometre();
+    private Chronometre chrPenalite2 = new Chronometre();
+    private Chronometre chrPenalite3 = new Chronometre();
+    private Chronometre chrPenalite4 = new Chronometre();
+    private Chronometre chrPenalite5 = new Chronometre();
+    private Chronometre chrPenalite6 = new Chronometre();
 
     // Instanciation de la fenêtre d'affichage du match
-    Window affichageMatch = new Window(new AffichageMatch());
+    private Window affichageMatch = new Window(new AffichageMatch());
 
     // Instanciation des listes de labels et de checkboxs pour le passage sur la fenêtre d'affichage du match
-    List<Label> labels = new List<Label>();
-    List<CheckBox> checkboxs = new List<CheckBox>();
+    private List<Label> labels = new List<Label>();
+    private List<CheckBox> checkboxs = new List<CheckBox>();
+
+    // Instanciaition de la liste d'équipe
+    List<Equipe> listEquipes = new List<Equipe>(new Equipe().GetList());
 
     public GestionMatch(int periode, int dureePeriode)
 	{
@@ -64,6 +66,9 @@ public partial class GestionMatch : ContentPage
 
         // Lancement de la fonction asynchrone pour la mise à jour des labels des chronomètres
         UpdateLabels();
+
+        pickEquipe1.ItemsSource = listEquipes;
+        pickEquipe2.ItemsSource = listEquipes;
     }
 
 
@@ -126,7 +131,8 @@ public partial class GestionMatch : ContentPage
         if (rep)
         {
             // Enregistrement des résultats
-                // A faire
+            // A faire
+            mMatch = new Match();
 
             // Redirection sur une nouvelle page de gestion de match pour un nouveau match (demandé par le client)
             await Navigation.PushAsync(new GestionMatch(chrPrincipal.getNombrePeriode(), chrPrincipal.getMinutesPeriode()));
@@ -491,6 +497,7 @@ public partial class GestionMatch : ContentPage
     // Méthode pour enlever un point à l'équipe 1
     private void OnbtnPointMoinsEquipe1Clicked(object sender, EventArgs e)
     {
+        // Vérification si le score est supérieur à 0 car on ne peut pas avoir de score négatif
         if (iPointsEquipe1 > 0)
         {
             iPointsEquipe1--;
@@ -508,6 +515,7 @@ public partial class GestionMatch : ContentPage
     // Méthode pour enlever un point à l'équipe 2
     private void OnbtnPointMoinsEquipe2Clicked(object sender, EventArgs e)
     {
+        // Vérification si le score est supérieur à 0 car on ne peut pas avoir de score négatif
         if (iPointsEquipe2 > 0)
         {
             iPointsEquipe2--;

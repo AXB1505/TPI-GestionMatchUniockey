@@ -15,6 +15,19 @@ namespace Unihockey.Model
 
         private NpgsqlCommand cmd = new NpgsqlCommand();
 
+        public NpgsqlConnection GetConnection()
+        {
+            return conn;
+        }
+
+        public NpgsqlCommand GetCommand()
+        {
+            return cmd;
+        }
+
+
+
+
         public void OpenConnection()
         {
             conn.Open();
@@ -24,12 +37,6 @@ namespace Unihockey.Model
         {
             conn.Close();
         }
-
-        //public NpgsqlDataReader ExecuteQuery(string query)
-        //{
-        //    NpgsqlCommand command = new NpgsqlCommand(query, conn);
-        //    return command.ExecuteReader();
-        //}
 
         public PostgresBdService() { }
 

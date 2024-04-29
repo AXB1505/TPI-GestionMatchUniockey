@@ -53,9 +53,11 @@
         <!-- Grille de disposition des équipes et du titre "Pénalité"-->
         <Grid Grid.Row="1"
               ColumnDefinitions="*,2*,*">
-            <Label Grid.Column="0" Text="Equipe 1" FontSize="40"/>
+            <!--<Label Grid.Column="0" Text="Equipe 1" FontSize="40"/>-->
+            <Picker Grid.Column="0" x:Name="pickEquipe1"/>
             <Label Grid.Column="1" Text="Penalités" TextDecorations="Underline" FontSize="Title"/>
-            <Label Grid.Column="2" Text="Equipe 2" FontSize="40"/>
+            <Picker Grid.Column="2" x:Name="pickEquipe2"/>
+            <!--<Label Grid.Column="2" Text="Equipe 2" FontSize="40"/>-->
         </Grid>
 
         <!-- Grille de disposition des points et des pénalités-->

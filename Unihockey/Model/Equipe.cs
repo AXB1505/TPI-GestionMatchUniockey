@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,110 @@ namespace Unihockey.Model
 {
     internal class Equipe
     {
-        public int Id { get; set; }
-        public string Nom { get; set; }
-        public Categorie Categorie { get; set; }
+        private string strNom = "";
+        private Categorie _categorie = new Categorie();
+
+        private PostgresBdService _db = new PostgresBdService();
+
+        public Equipe()
+        {
+        }
+
+        public Equipe(string nom, Categorie categorie)
+        {
+            strNom = nom;
+            _categorie = categorie;
+        }
+
+        public string getNom()
+        {
+            return strNom;
+        }
+
+        public Categorie getCategorie()
+        {
+            return _categorie;
+        }
+
+        public List<Equipe> GetList()
+        {
+            List<Equipe> equipes = new List<Equipe>();
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM Equipe", _db.GetConnection());
+
+            _db.OpenConnection();
+
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Equipe e = new Equipe(reader["nom"].ToString(), new Categorie(_categorie.GetList()[(int)reader["cat_num"]-1].getNom()));
+                equipes.Add(e);
+            }
+
+            _db.CloseConnection();
+
+            return equipes;
+        }
+
+        public void Create()
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO Equipe(nom, cat_num) VALUES('" + this.getNom() +"', '" + this.getCategorie().getId() + "');", _db.GetConnection());
+
+            _db.OpenConnection();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            _db.CloseConnection();
+        }
+
+        public void Edit(Equipe equipe)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand("UPDATE Equipe SET nom='" + equipe.getNom() + "', cat_num='" + equipe.getCategorie().getId() + "' WHERE num=" + this.getId() + ";", _db.GetConnection());
+
+            _db.OpenConnection();
+
+            //try
+            //{
+                cmd.ExecuteNonQuery();
+            //}
+            //catch (Exception ex)
+            //{
+            //}
+
+            _db.CloseConnection();
+        }
+
+        public int getId()
+        {
+            int id = 0;
+
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT num FROM Equipe WHERE nom='" + strNom + "';", _db.GetConnection());
+
+            _db.OpenConnection();
+
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                id = reader.GetInt32(0);
+            }
+
+            _db.CloseConnection();
+
+            return id;
+        }
+
+
+        public override string ToString()
+        {
+            return $"{strNom} ({_categorie.getNom()})";
+        }
     }
 }

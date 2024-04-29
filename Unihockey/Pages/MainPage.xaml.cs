@@ -20,14 +20,14 @@ namespace Unihockey.Pages
         {
 
             //Fonctionnel
-
+            /*
             const string DB_CONNECTION_STRING = "Server=localhost;Port=5432;Database=unihockey;User Id=postgres;Password=TPI;";
 
             NpgsqlConnection conn = new NpgsqlConnection(DB_CONNECTION_STRING);
 
             conn.Open();
 
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT nom FROM categorie", conn);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM categorie", conn);
 
             NpgsqlDataReader dr = cmd.ExecuteReader();
 
@@ -35,11 +35,37 @@ namespace Unihockey.Pages
 
             while (dr.Read())
             {
-                nom = dr.GetString(0);
+                nom = dr["nom"].ToString();
                 Debug.WriteLine(nom);
             }
             dr.Close();
+            */
 
+            /*                                                  EXEMPLE D'UPDATE D'EQUIPE
+            Equipe equ = new Equipe();
+            List<Equipe> cs = equ.GetList();
+
+            foreach (Equipe eq in cs)
+            {
+                Debug.WriteLine("");
+            }
+
+            Equipe nEquipe = new Equipe("UHC Les Brenets", new Categorie("Juniors A"));
+
+            nEquipe.Edit(new Equipe("ITALIE", new Categorie("Juniors B")));
+            */
+
+            Equipe equ = new Equipe();
+            List<Equipe> cs = equ.GetList();
+
+            foreach (Equipe eq in cs)
+            {
+                Debug.WriteLine("");
+            }
+
+            Equipe nEquipe = new Equipe("UHC Les Brenets", new Categorie("Juniors A"));
+
+            nEquipe.Edit(new Equipe("ITALIE", new Categorie("Juniors B")));
         }
     }
 
