@@ -15,8 +15,6 @@
                 <Setter Property="FontFamily" Value="OppenSansRegular"/>
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-                <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="FontSize" Value="Medium"/>
             </Style>

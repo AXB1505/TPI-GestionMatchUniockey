@@ -1,7 +1,6 @@
 ﻿using Npgsql;
 using System.Diagnostics;
 using Unihockey.Model;
-using Npgsql;
 namespace Unihockey.Pages
 {
     public partial class MainPage : ContentPage

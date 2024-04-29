@@ -19,5 +19,11 @@
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
         </Tab>
+        <Tab Title="Equipes">
+            <ShellContent
+                Title="Equipes"
+                ContentTemplate="{DataTemplate local:GestionEquipes}"
+                Route="Equipes" />
+        </Tab>
     </TabBar>
 </Shell>

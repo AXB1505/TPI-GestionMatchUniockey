@@ -66,5 +66,10 @@ namespace Unihockey.Model
 
             return id;
         }
+
+        public override string ToString()
+        {
+            return strNom;
+        }
     }
 }

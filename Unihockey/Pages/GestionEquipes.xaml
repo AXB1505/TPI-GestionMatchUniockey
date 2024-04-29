@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Unihockey.Pages.GestionEquipes">
+
+    <FlexLayout Direction="Column"
+                AlignItems="Center">
+        <Label Text="Gestion des équipes"
+                   HorizontalOptions="Center"
+                   FontSize="Large"/>
+        <Button Text="Créer une équipe"
+                Clicked="OnbtnCreerClicked"
+                HorizontalOptions="Center"
+                FontSize="Medium"/>
+        <ListView x:Name="lvEquipes"
+                  WidthRequest="800"
+                  HeightRequest="400"
+                  ItemSelected="OnlvEquipesItemSelected"/>
+    </FlexLayout>
+
+</ContentPage>

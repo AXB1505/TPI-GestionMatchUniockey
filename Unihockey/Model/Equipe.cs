@@ -61,13 +61,7 @@ namespace Unihockey.Model
 
             _db.OpenConnection();
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-            }
+            cmd.ExecuteNonQuery();
 
             _db.CloseConnection();
         }
@@ -78,13 +72,18 @@ namespace Unihockey.Model
 
             _db.OpenConnection();
 
-            //try
-            //{
-                cmd.ExecuteNonQuery();
-            //}
-            //catch (Exception ex)
-            //{
-            //}
+            cmd.ExecuteNonQuery();
+
+            _db.CloseConnection();
+        }
+
+        public void Delete()
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand("DELETE FROM Equipe WHERE num=" + this.getId() + ";", _db.GetConnection());
+
+            _db.OpenConnection();
+            
+            cmd.ExecuteNonQuery();
 
             _db.CloseConnection();
         }

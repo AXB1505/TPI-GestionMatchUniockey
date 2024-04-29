@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Unihockey.Pages.ModifierEquipe"
+             Title="ModifierEquipe">
+    <VerticalStackLayout WidthRequest="800">
+        <Label x:Name="lblEquipeAModifier"/>
+
+        <Label Text="Nom :"
+               HorizontalTextAlignment="Start"
+               HorizontalOptions="Start"/>
+        <Entry x:Name="tbxNom" Placeholder="Nom de l'équipe"/>
+        <Label Text="Categorie :"
+               HorizontalTextAlignment="Start"
+               HorizontalOptions="Start"/>
+        <Picker x:Name="pickCategorie"/>
+        <Button Text="Confirmer" 
+                Clicked="OnbtnConfirmerClicked"/>
+    </VerticalStackLayout>
+</ContentPage>
