@@ -66,7 +66,7 @@ ALTER TABLE IF EXISTS Match                                     -- Modification 
     DROP CONSTRAINT IF EXISTS FK1_Equ1,                         -- Vérification que FK1_Equ1 n'existe pas déjà et suppression si c'est le cas
     ADD CONSTRAINT FK1_Equ1                                     -- Ajout d'une contrainte de nom FK1_Equ1 
             FOREIGN KEY (Equ_num1)                              -- Définition de la clé étrangère Equ_num1
-            REFERENCES Equipe(num),                             -- Référence de la clé étrangère sur la clé primaire de la table Equipe
+            REFERENCES Equipe(num)                              -- Référence de la clé étrangère sur la clé primaire de la table Equipe
     DROP CONSTRAINT IF EXISTS FK2_Equ2,                         -- Vérification que FK2_Equ2 n'existe pas déjà et suppression si c'est le cas
     ADD CONSTRAINT FK2_Equ2                                     -- Ajout d'une contrainte de nom FK2_Equ2 
             FOREIGN KEY (Equ_num2)                              -- Définition de la clé étrangère Equ_num2
