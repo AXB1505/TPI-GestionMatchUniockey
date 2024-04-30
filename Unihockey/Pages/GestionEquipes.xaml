@@ -7,8 +7,9 @@
     <FlexLayout Direction="Column"
                 AlignItems="Center">
         <Label Text="Gestion des équipes"
-                   HorizontalOptions="Center"
-                   FontSize="Large"/>
+               HorizontalOptions="Center"
+               FontSize="Large"
+               TextDecorations="Underline"/>
         <Button Text="Créer une équipe"
                 Clicked="OnbtnCreerClicked"
                 HorizontalOptions="Center"

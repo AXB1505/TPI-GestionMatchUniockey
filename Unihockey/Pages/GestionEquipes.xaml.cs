@@ -7,7 +7,7 @@ public partial class GestionEquipes : ContentPage
 	public GestionEquipes()
 	{
 		InitializeComponent();
-
+        BindingContext = new Equipe().GetList();
 		lvEquipes.ItemsSource = new Equipe().GetList();
     }
 

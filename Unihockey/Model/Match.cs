@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Maui.ApplicationModel.DataTransfer;
 using Npgsql;
 
 namespace Unihockey.Model
@@ -15,7 +16,13 @@ namespace Unihockey.Model
         private int iScoreEquipe1;
         private int iScoreEquipe2;
 
-        PostgresBdService _db = new PostgresBdService();
+        public string Equipe1 { get => equEquipe1.getNom(); }
+        public string Equipe2 { get => equEquipe2.getNom(); }
+        public string DebutMatch { get => dtDebutMatch.ToString(); }
+        public string ScoreEquipe1 { get => iScoreEquipe1.ToString(); }
+        public string ScoreEquipe2 { get => iScoreEquipe2.ToString(); }
+
+    PostgresBdService _db = new PostgresBdService();
 
         public Match() { }
 
@@ -37,9 +44,9 @@ namespace Unihockey.Model
             dtDebutMatch = debutMatch;
         }
 
-        public Equipe getEquipe1()
+        public string getEquipe1()
         {
-            return equEquipe1;
+            return equEquipe1.getNom();
         }
         public Equipe getEquipe2()
         {
@@ -63,7 +70,10 @@ namespace Unihockey.Model
         {
             List<Match> matches = new List<Match>();
             // Instanciation de la requête pour obtenir tous les matchs de la base de données
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM Match", _db.GetConnection());
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT Equipe1.nom as equipe1, Equipe2.nom as equipe2, " +
+                "Match.scoreEquipe1 as scoreEquipe1, Match.scoreEquipe2 as scoreEquipe2, Match.debutMatch as " +
+                "debutMatch FROM Match, Equipe Equipe1, Equipe Equipe2 Where Match.Equ_num1 = Equipe1.num AND " +
+                "Equ_num2 = Equipe2.num;", _db.GetConnection());
 
             _db.OpenConnection();
 
@@ -72,8 +82,11 @@ namespace Unihockey.Model
 
             // Boucle pour ajouter chaque match à la liste avec le retour de la requête
             while (reader.Read())
+
             {
-                matches.Add(new Match(new Equipe().GetList()[(int)reader["Equ_num1"]-1], new Equipe().GetList()[(int)reader["Equ_num2"] - 1], (int)reader["scoreEquipe1"], (int)reader["scoreEquipe2"], (DateTime)reader["debutMatch"]));
+                matches.Add(new Match(new Equipe().GetList().Find(x => x.getNom() == reader["equipe1"].ToString()), 
+                    new Equipe().GetList().Find(x => x.getNom() == reader["equipe2"].ToString()), 
+                    (int)reader["scoreEquipe1"], (int)reader["scoreEquipe2"], (DateTime)reader["debutMatch"]));
             }
 
             return matches;

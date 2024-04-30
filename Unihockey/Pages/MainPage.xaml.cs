@@ -54,12 +54,12 @@ namespace Unihockey.Pages
             nEquipe.Edit(new Equipe("ITALIE", new Categorie("Juniors B")));
             */
 
-            Match match = new Match();
-            List<Match> matchs = match.getList();
+            Equipe equipe = new Equipe();
+            List<Equipe> equipes = equipe.GetList();
 
-            foreach (Match m in matchs)
+            foreach (Equipe equ in equipes)
             {
-                Debug.WriteLine(m.ToString());
+                Debug.WriteLine(equ.ToString());
             }
         }
     }

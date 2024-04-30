@@ -24,7 +24,8 @@
             </Style>
             <Style x:Key="ChronometreStyle" TargetType="Border">
                 <Setter Property="BackgroundColor" Value="#EEE" />
-                <Setter Property="StrokeShape" Value="RoundRectangle 30" />
+                <Setter Property="MinimumHeightRequest" Value="50"/>
+                <Setter Property="MinimumWidthRequest" Value="200"/>
             </Style>
             <Style x:Key="PointStyle" TargetType="Border">
                 <Setter Property="Background" Value="#EEE"/>
@@ -32,6 +33,24 @@
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="Background" Value="DarkGray"></Setter>
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="BackgroundColor" Value="WhiteSmoke" />
+            </Style>
+            <Style x:Key="PenaliteStyle" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+            <Style x:Key="btnChronometrePrincpial" TargetType="Button">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="WidthRequest" Value="90"/>
+                <Setter Property="HeightRequest" Value="35"/>
+            </Style>
+            <Style x:Key="btnPenalite" TargetType="Button">
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="WidthRequest" Value="80"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

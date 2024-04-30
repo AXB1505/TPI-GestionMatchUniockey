@@ -21,6 +21,7 @@ public partial class GestionMatch : ContentPage
 
     // Instanciation des chronomètres
     private Chronometre chrPrincipal = new Chronometre();
+    private Chronometre chrTempsMort = new Chronometre(0,30,1);
     private Chronometre chrPenalite1 = new Chronometre();
     private Chronometre chrPenalite2 = new Chronometre();
     private Chronometre chrPenalite3 = new Chronometre();
@@ -52,6 +53,7 @@ public partial class GestionMatch : ContentPage
         labels.Add(lblPenalite6);
         labels.Add(lblPointEquipe1);
         labels.Add(lblPointEquipe2);
+        labels.Add(lblChrTempsMort);
 
         // Ajout des checkboxs dans la liste de checkboxs pour le passage sur la fenêtre d'affichage du match
         checkboxs.Add(cbxPenalite1);
@@ -79,7 +81,7 @@ public partial class GestionMatch : ContentPage
         if (chrPrincipal.getEstFini() == false)
         {
             chrPrincipal.Start();
-
+            chrTempsMort.Pause();
             // Check si la pénalité est en cours et démarrage du chronomètre de pénalité si nécessaire pour chaque pénalité
             if (chrPenalite1.getTempsReset() != chrPenalite1.GetTempsRestant())
             {
@@ -155,6 +157,22 @@ public partial class GestionMatch : ContentPage
     }
 
 
+    private void OnbtnPlayTempsMortClicked(object sender, EventArgs e)
+    {
+        chrTempsMort.Start();
+        chrPrincipal.Pause();
+        chrPenalite1.Pause();
+        chrPenalite2.Pause();
+        chrPenalite3.Pause();
+        chrPenalite4.Pause();
+        chrPenalite5.Pause();
+        chrPenalite6.Pause();
+    }
+
+    private void OnbtnPauseTempsMortClicked(object sender, EventArgs e)
+    {
+        chrTempsMort.Pause();
+    }
 
 
 
@@ -248,6 +266,21 @@ public partial class GestionMatch : ContentPage
     {
         chrPenalite6.Pause();
     }
+
+
+    // Méthode pour la vérification du choix des équipes (ne peuvent pas être les mêmes)
+    private void OnpickEquipeSelectedItemChanged(object sender, EventArgs e)
+    {
+        Picker pick = (Picker)sender;
+        if (pickEquipe1.SelectedItem == pickEquipe2.SelectedItem)
+        {
+            // Affichage d'un message d'erreur
+            DisplayAlert("Erreur", "Vous ne pouvez pas choisir la même équipe pour les deux équipes.", "OK");
+            // Remise à zéro de la liste déroulante
+            pick.SelectedItem = null;
+        }
+    }
+
 
 
     // Méthodes pour afficher ou caché les pénalités
@@ -535,6 +568,7 @@ public partial class GestionMatch : ContentPage
         while (true)
         {
             lblChrPrincipal.Text = chrPrincipal.GetTempsRestant();
+            lblChrTempsMort.Text = chrTempsMort.GetTempsRestant();
             lblPenalite1.Text = chrPenalite1.GetTempsRestant();
             lblPenalite2.Text = chrPenalite2.GetTempsRestant();
             lblPenalite3.Text = chrPenalite3.GetTempsRestant();
