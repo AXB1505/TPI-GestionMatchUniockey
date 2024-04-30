@@ -1,9 +1,9 @@
 /*
     @Author : Alessandro Borrani
-    Code sql pour la suppression de toutes les tables de la BD
+    Code pour le montage complet de la base de données pour l'application
 */
--- Suppression de tables
 
+-- Suppression de tables
 DROP TABLE IF EXISTS Categorie CASCADE                          -- Suppression de la table Categorie en cascade
 ;
 
@@ -13,12 +13,8 @@ DROP TABLE IF EXISTS Equipe CASCADE                             -- Suppression d
 DROP TABLE IF EXISTS Match CASCADE                              -- Suppression de la table Match en cascade
 ;
 
-/*
-    @Author : Alessandro Borrani
-    Code sql pour la création des tables de la BD
-*/
--- Création de tables
 
+-- Création de tables
 CREATE TABLE IF NOT EXISTS Categorie(
     num SERIAL PRIMARY KEY,                                     -- Clé primaire identifiant de la catégorie
     nom TEXT NOT NULL                                           -- Nom de l'équipe || Unique (NID-1)
@@ -37,8 +33,8 @@ CREATE TABLE IF NOT EXISTS Match(
     Equ_num1 INTEGER NOT NULL,                                  -- Clé étrangère identifiant de l'équipe 1 || Unique avec Equ_num2 et debutMatch (NID-1)
     Equ_num2  INTEGER NOT NULL,                                 -- Clé étrangère identifiant de l'équipe 2 || Unique avec Equ_num1 et debutMatch (NID-1)
     debutMatch TIMESTAMP NOT NULL,                              -- Date et heure de début du match || Unique avec Equ_num1 et Equ_num2 (NID-1)
-    scoreEquipe1 NUMERIC NOT NULL,                              -- Score de l'équipe 1
-    scoreEquipe2 NUMERIC NOT NULL                               -- Score de l'équipe 2
+    scoreEquipe1 INTEGER NOT NULL,                              -- Score de l'équipe 1
+    scoreEquipe2 INTEGER NOT NULL                               -- Score de l'équipe 2
 )   
 ;
 
@@ -66,15 +62,28 @@ ALTER TABLE IF EXISTS Match                                     -- Modification 
     DROP CONSTRAINT IF EXISTS FK1_Equ1,                         -- Vérification que FK1_Equ1 n'existe pas déjà et suppression si c'est le cas
     ADD CONSTRAINT FK1_Equ1                                     -- Ajout d'une contrainte de nom FK1_Equ1 
             FOREIGN KEY (Equ_num1)                              -- Définition de la clé étrangère Equ_num1
-            REFERENCES Equipe(num),                              -- Référence de la clé étrangère sur la clé primaire de la table Equipe
+            REFERENCES Equipe(num)                              -- Référence de la clé étrangère sur la clé primaire de la table Equipe
+            ON DELETE CASCADE,                                  -- Définition de la suppression en cascade des match si l'équipe 1 est supprimée
     DROP CONSTRAINT IF EXISTS FK2_Equ2,                         -- Vérification que FK2_Equ2 n'existe pas déjà et suppression si c'est le cas
     ADD CONSTRAINT FK2_Equ2                                     -- Ajout d'une contrainte de nom FK2_Equ2 
             FOREIGN KEY (Equ_num2)                              -- Définition de la clé étrangère Equ_num2
-            REFERENCES Equipe(num),                             -- Référence de la clé étrangère sur la clé primaire de la table Equipe
+            REFERENCES Equipe(num)                              -- Référence de la clé étrangère sur la clé primaire de la table Equipe
+            ON DELETE CASCADE,                                  -- Définition de la suppression en cascade des match si l'équipe 2 est supprimée
     DROP CONSTRAINT IF EXISTS NID1_Mat_Equ1_Equ2_debutMatch,    -- Vérification que NID1_Mat_Equ1_Equ2_debutMatch n'existe pas déjà et suppression si c'est le cas
-    ADD CONSTRAINT NID1_Mat_Equ1_Equ2_debutMatch               -- Ajout d'une contrainte de nom NID1_Mat_Equ1_Equ2_debutMatch 
+    ADD CONSTRAINT NID1_Mat_Equ1_Equ2_debutMatch                -- Ajout d'une contrainte de nom NID1_Mat_Equ1_Equ2_debutMatch 
             UNIQUE (Equ_num1, Equ_num2, debutMatch),            -- Unicité des champs Equ_num1, Equ_num2, debutMatch
     DROP CONSTRAINT IF EXISTS CHK_Match_Equipes,                -- Vérification que CHK_Match_Equipes n'existe pas déjà et suppression si c'est le cas
     ADD CONSTRAINT CHK_Match_Equipes                            -- Ajout d'une contrainte de nom CHK_Match_Equipes
             CHECK (Equ_num1 != Equ_num2)                        -- Check que l'équipe1 ne soit pas égale à l'équipe2
+;
+
+-- Insértion des Categorie
+INSERT INTO Categorie(nom) VALUES
+    ('Juniors E' ),
+    ('Juniors D'),
+    ('Juniors C'),
+    ('Juniors B'),
+    ('Juniors A'),
+    ('Femme'),
+    ('Homme')
 ;

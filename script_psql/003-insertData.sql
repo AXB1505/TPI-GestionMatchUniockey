@@ -2,9 +2,11 @@
     @Author : Alessandro Borrani
     Code sql pour l'insertion de données de test dans la BD
 */
+
 -- Insertion de données
 -- Lieu
 -- Categorie
+
 INSERT INTO Categorie(nom) VALUES
     ('Juniors E' ),
     ('Juniors D'),
@@ -14,6 +16,7 @@ INSERT INTO Categorie(nom) VALUES
     ('Femme'),
     ('Homme')
 ;
+
 -- Equipe
 INSERT INTO Equipe(nom, Cat_num) VALUES
     ('Fleurier Unihockey Club', 1),
@@ -24,6 +27,7 @@ INSERT INTO Equipe(nom, Cat_num) VALUES
     ('UHC La Brévine', 1),
     ('UHC La Chaux-de-Fonds', 1)
 ;
+
 -- Resultat
 INSERT INTO Match(Equ_num1, Equ_num2, debutMatch, scoreEquipe1, scoreEquipe2) VALUES
     (1, 2, '2024-01-01 14:00:00', 2, 1),

@@ -2,8 +2,8 @@
     @Author : Alessandro Borrani
     Code sql pour la suppression de toutes les tables de la BD
 */
--- Suppression de tables
 
+-- Suppression de tables
 DROP TABLE IF EXISTS Categorie CASCADE                          -- Suppression de la table Categorie en cascade
 ;
 
