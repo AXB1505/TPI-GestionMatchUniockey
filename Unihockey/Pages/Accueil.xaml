@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Unihockey.Pages.Accueil">
+             x:Class="Unihockey.Pages.Accueil"
+             Style="{StaticResource PagesStyle}">
              <!--Title="Accueil"-->
 
-    <VerticalStackLayout>
+    <VerticalStackLayout HorizontalOptions="Center">
         <Label 
             Text="Application de gestion de match d'Unihockey"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <HorizontalStackLayout>
+            HorizontalOptions="Center"
+            Margin="0, 50, 0, 0"
+            FontSize="Header"/>
+        <HorizontalStackLayout HorizontalOptions="Center"
+                               WidthRequest="900"
+                               HeightRequest="600">
             <Button
-                Text="Créer un match de 1x24 minutes"
-                Clicked="OnbtnCreerMatch1x24Clicked" />
+                Text="1x24 minutes"
+                Clicked="OnbtnCreerMatch1x24Clicked"
+                FontSize="Title"
+                WidthRequest="350"
+                HeightRequest="350"
+                Margin="20"/>
             <Button
-                Text="Créer un match 2x20 minutes"
-                Clicked="OnbtnCreerMatch2x20Clicked" />
+                Text="2x20 minutes"
+                Clicked="OnbtnCreerMatch2x20Clicked"
+                FontSize="Title"
+                WidthRequest="350"
+                HeightRequest="350"
+                Margin="20"/>
 
         </HorizontalStackLayout>
         

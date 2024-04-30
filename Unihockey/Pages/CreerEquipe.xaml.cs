@@ -19,7 +19,15 @@ public partial class CreerEquipe : ContentPage
 	private void OnbtnConfirmerClicked(object sender, EventArgs e)
 	{
         Equipe equEquipe = new Equipe(tbxNom.Text, (Categorie)pickCategorie.SelectedItem);
-        equEquipe.Create();
+        try
+        {
+            equEquipe.Create();
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Erreur", ex.Message, "OK");
+            return;
+        }
         lvListView.ItemsSource = new Equipe().GetList();
         Navigation.PopAsync();
     }

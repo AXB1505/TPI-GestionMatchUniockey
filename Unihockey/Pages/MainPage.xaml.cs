@@ -54,17 +54,13 @@ namespace Unihockey.Pages
             nEquipe.Edit(new Equipe("ITALIE", new Categorie("Juniors B")));
             */
 
-            Equipe equ = new Equipe();
-            List<Equipe> cs = equ.GetList();
+            Match match = new Match();
+            List<Match> matchs = match.getList();
 
-            foreach (Equipe eq in cs)
+            foreach (Match m in matchs)
             {
-                Debug.WriteLine("");
+                Debug.WriteLine(m.ToString());
             }
-
-            Equipe nEquipe = new Equipe("UHC Les Brenets", new Categorie("Juniors A"));
-
-            nEquipe.Edit(new Equipe("ITALIE", new Categorie("Juniors B")));
         }
     }
 
