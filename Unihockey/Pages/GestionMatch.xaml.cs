@@ -40,9 +40,10 @@ public partial class GestionMatch : ContentPage
     // Instanciaition de la liste d'équipe
     List<Equipe> listEquipes = new List<Equipe>();
 
-    // Instanciation des listes de labels et de checkboxs pour le passage sur la fenêtre d'affichage du match
+    // Instanciation des listes de labels, de checkboxs et de pickers pour le passage sur la fenêtre d'affichage du match
     private List<Label> labels = new List<Label>();
     private List<CheckBox> checkboxs = new List<CheckBox>();
+    private List<Picker> pickers = new List<Picker>();
 
     public GestionMatch(int periode, int dureePeriode, object categorie)
 	{
@@ -76,6 +77,11 @@ public partial class GestionMatch : ContentPage
         checkboxs.Add(cbxPenalite4);
         checkboxs.Add(cbxPenalite5);
         checkboxs.Add(cbxPenalite6);
+        checkboxs.Add(cbxTempsMort);
+
+        // Ajout des pickers dans la liste de pickers pour le passage sur la fenêtre d'affichage du match
+        pickers.Add(pickEquipe1);
+        pickers.Add(pickEquipe2);
 
         // Lancement de la fonction asynchrone pour la mise à jour des labels des chronomètres
         UpdateLabels();
@@ -179,13 +185,14 @@ public partial class GestionMatch : ContentPage
     private void OnbtnAffichageSecondEcranClicked(object sender, EventArgs e)
     {
         // Ouverture de la fenêtre d'affichage du match et transmission des labels et checkboxs pour l'affichage
-        Window affichageMatch = new Window(new AffichageMatch(labels, checkboxs));
+        Window affichageMatch = new Window(new AffichageMatch(labels, checkboxs, pickers));
         Application.Current.OpenWindow(affichageMatch);
     }
 
 
     private void OnbtnPlayTempsMortClicked(object sender, EventArgs e)
     {
+        cbxTempsMort.IsChecked = true;
         chrTempsMort.Start();
         chrPrincipal.Pause();
         chrPenalite1.Pause();
@@ -196,12 +203,11 @@ public partial class GestionMatch : ContentPage
         chrPenalite6.Pause();
     }
 
+    // Méthode pour mettre en pause le chronomètre de temps mort
     private void OnbtnPauseTempsMortClicked(object sender, EventArgs e)
     {
         chrTempsMort.Pause();
     }
-
-
 
     // Méthodes pour les boutons des pénalités
 

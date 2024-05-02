@@ -39,24 +39,24 @@
                         Text="Stop"
                         Clicked="OnbtnStopClicked"
                         Style="{StaticResource btnChronometrePrincpial}"/>
-                <Border>
-                    <HorizontalStackLayout HorizontalOptions="Center">
-                        <CheckBox x:Name="cbxCroissant"
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <CheckBox x:Name="cbxCroissant"
                                   CheckedChanged="OnCbxCroissantCheckedChanged"/>
-                        <Label Text="Croissant ?"
+                    <Label Text="Croissant ?"
                                FontSize="15"/>
-                    </HorizontalStackLayout>
-                </Border>
+                </HorizontalStackLayout>
                 <Button Text="Afficher"
                         Clicked="OnbtnAffichageSecondEcranClicked"/>
 
             </HorizontalStackLayout>
         </Grid>
 
-        <!-- Grille de disposition des équipes et du titre "Pénalité"-->
+        <!-- Grille de disposition des équipes et du temps mort-->
         <Grid Grid.Row="1"
               ColumnDefinitions="*,2*,*"
               Padding="0,0,0,5">
+
+            <!--Conteneur de la liste déroulante de l'équipe 1-->
             <Grid Grid.Column="0"
                   ColumnDefinitions="5*,1*">
                 <Picker x:Name="pickEquipe1" 
@@ -73,11 +73,13 @@
                 </Grid>
 
             </Grid>
+            
+            <!--Conteneur du temps mort-->
             <VerticalStackLayout Grid.Column="1">
                 <Border Style="{StaticResource ChronometreStyle}"
                         WidthRequest="300"
                         Margin="20,20,20,0">
-                <Label x:Name="lblChrTempsMort"
+                    <Label x:Name="lblChrTempsMort"
                        Text="00:00"
                        FontSize="20"/>
                 </Border>
@@ -93,8 +95,15 @@
                         Text="Pause"
                         Clicked="OnbtnPauseTempsMortClicked"
                         Style="{StaticResource btnPenalite}"/>
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="cbxTempsMort"/>
+                        <Label Text="Afficher ?"
+                               FontSize="15"/>
+                    </HorizontalStackLayout>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
+
+            <!--Conteneur de la liste déroulante de l'équipe 2-->
             <Grid Grid.Column="2"
                   ColumnDefinitions="5*,1*">
                 <Picker x:Name="pickEquipe2" 

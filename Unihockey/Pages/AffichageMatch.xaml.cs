@@ -1,3 +1,5 @@
+using Unihockey.Model;
+
 namespace Unihockey.Pages;
 
 public partial class AffichageMatch : ContentPage
@@ -5,13 +7,15 @@ public partial class AffichageMatch : ContentPage
     // Instanciation des listes de labels et de checkbox pour les récupérer depuis la page de gestion du match
     List<Label> labelsParent = new List<Label>();
     List<CheckBox> checkBoxesParent = new List<CheckBox>();
+    List<Picker> pickersParent = new List<Picker>();
 
-	public AffichageMatch(List<Label> labels, List<CheckBox> checkBoxes)
+	public AffichageMatch(List<Label> labels, List<CheckBox> checkBoxes, List<Picker> pickers)
 	{
 		InitializeComponent();
         // Récupération des listes de labels et de checkbox depuis la page de gestion du match
         labelsParent = labels;
         checkBoxesParent = checkBoxes;
+        pickersParent = pickers;
         UpdateLabels();
 	}
 
@@ -30,6 +34,15 @@ public partial class AffichageMatch : ContentPage
             lblPenalite6.Text = labelsParent[6].Text;
             lblPointEquipe1.Text = labelsParent[7].Text;
             lblPointEquipe2.Text = labelsParent[8].Text;
+            lblchrTempsMort.Text = labelsParent[9].Text;
+            Equipe equEquipe1 = (Equipe)pickersParent[0].SelectedItem;
+            Equipe equEquipe2 = (Equipe)pickersParent[1].SelectedItem;
+            if (equEquipe1 != null && equEquipe2 != null)
+            {
+                lblEquipe1.Text = equEquipe1.getNom();
+                lblEquipe2.Text = equEquipe2.getNom();
+            }
+
 
             // Check de l'affichage des pénalités en fonction des checkbox de la page de gestion du match
             if (checkBoxesParent[0].IsChecked)
@@ -79,6 +92,16 @@ public partial class AffichageMatch : ContentPage
             else
             {
                 boxPenalite6.IsVisible = false;
+            }
+            if (checkBoxesParent[6].IsChecked)
+            {
+                boxChrTempsMort.IsVisible = true;
+                lblTitrePenalite.IsVisible = false;
+            }
+            else
+            {
+                boxChrTempsMort.IsVisible = false;
+                lblTitrePenalite.IsVisible = true;
             }
 
 

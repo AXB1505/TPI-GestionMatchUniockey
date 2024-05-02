@@ -23,12 +23,24 @@
             </Border>
         </Grid>
 
-        <!-- Grille de disposition des équipes et du titre "Pénalité"-->
+        <!-- Grille de disposition du nom des équipes et du titre "Pénalité"-->
         <Grid Grid.Row="1"
               ColumnDefinitions="*,2*,*">
-            <Label Grid.Column="0" Text="Equipe 1" FontSize="40"/>
-            <Label Grid.Column="1" Text="Penalités" TextDecorations="Underline" FontSize="Title"/>
-            <Label Grid.Column="2" Text="Equipe 2" FontSize="40"/>
+            <Label x:Name="lblEquipe1" Grid.Column="0" Text="Equipe 1" FontSize="40"/>
+            <Border x:Name="boxChrTempsMort"
+                    Style="{StaticResource ChronometreStyle}"
+                    WidthRequest="400"
+                    Margin="20,20,20,0"
+                    Grid.Column="1"
+                    
+                    IsVisible="False">
+                <Label x:Name="lblchrTempsMort"
+                       Text="00:00"
+                       TextColor="Red"
+                       FontSize="100"/>
+            </Border>
+            <Label x:Name="lblTitrePenalite" Grid.Column="1" Text="Penalités" TextDecorations="Underline" FontSize="Title"/>
+            <Label x:Name="lblEquipe2" Grid.Column="2" Text="Equipe 2" FontSize="40"/>
         </Grid>
 
         <!-- Grille de disposition des points et des pénalités-->
