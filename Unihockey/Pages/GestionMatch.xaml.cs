@@ -10,14 +10,17 @@ namespace Unihockey.Pages;
 public partial class GestionMatch : ContentPage
 {
     // Instanciation de l'objet Match
-    private Match mMatch = new Match();
+    private Match _Match = new Match();
+
+    // Instanciation de la categorie du match
+    private Categorie _Categorie = new Categorie();
 
     // Variables de contrôle que le match est terminé
     private bool bMatchFini = false;
 
     // Instantiation des points des équipes
-    private int iPointsEquipe1;
-    private int iPointsEquipe2;
+    private int iScoreEquipe1;
+    private int iScoreEquipe2;
 
     // Instanciation des chronomètres
     private Chronometre chrPrincipal = new Chronometre();
@@ -30,18 +33,24 @@ public partial class GestionMatch : ContentPage
     private Chronometre chrPenalite6 = new Chronometre();
 
     // Instanciaition de la liste d'équipe
-    List<Equipe> listEquipes = new List<Equipe>(new Equipe().GetList());
+    List<Equipe> listEquipes = new List<Equipe>();
 
     // Instanciation des listes de labels et de checkboxs pour le passage sur la fenêtre d'affichage du match
     private List<Label> labels = new List<Label>();
     private List<CheckBox> checkboxs = new List<CheckBox>();
 
-    public GestionMatch(int periode, int dureePeriode)
+    public GestionMatch(int periode, int dureePeriode, object categorie)
 	{
         InitializeComponent();
         // Initialisation du chronomètre principal selon la durée de la période et le nombre de la période reçu en paramètre
         chrPrincipal = new Chronometre(dureePeriode, 0, periode);
         lblChrPrincipal.Text = chrPrincipal.getTempsReset();
+
+        // Récupération de la catégorie du match
+        _Categorie = (Categorie)categorie;
+
+        // Récupération des équipes en fonction de la categorie
+        listEquipes = new List<Equipe>(new Equipe().GetList().Where(x => x.getCategorie().getNom() == _Categorie.getNom()));
 
         // Ajout des labels dans les listes de labels pour le passage sur la fenêtre d'affichage du match
         labels.Add(lblChrPrincipal);
@@ -132,10 +141,10 @@ public partial class GestionMatch : ContentPage
         {
             // Enregistrement des résultats
             // A faire
-            mMatch = new Match();
+            _Match = new Match((Equipe)pickEquipe1.SelectedItem, (Equipe)pickEquipe2.SelectedItem, iScoreEquipe1, iScoreEquipe2);
 
             // Redirection sur une nouvelle page de gestion de match pour un nouveau match (demandé par le client)
-            await Navigation.PushAsync(new GestionMatch(chrPrincipal.getNombrePeriode(), chrPrincipal.getMinutesPeriode()));
+            await Navigation.PushAsync(new GestionMatch(chrPrincipal.getNombrePeriode(), chrPrincipal.getMinutesPeriode(), _Categorie));
             // Supression de la page active de gestion du match
             Navigation.RemovePage(this);
         }
@@ -297,7 +306,7 @@ public partial class GestionMatch : ContentPage
             // Affiche la penalité
             boxPenalite1.IsVisible = true;
             // Demande de choix de la durée de la pénalité
-            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Annuler", null, "2min", "5min", "10min");
 
             // Switch pour le choix de la durée de la pénalité
             switch (rep)
@@ -311,7 +320,7 @@ public partial class GestionMatch : ContentPage
                 case "10min":
                     chrPenalite1 = new Chronometre(10, 0, 1);
                     break;
-                case "Cancel":
+                case "Annuler":
                     cbx.IsChecked = false;
                     boxPenalite1.IsVisible = false;
                     break;
@@ -336,7 +345,7 @@ public partial class GestionMatch : ContentPage
         {
             // Affiche la penalité
             boxPenalite2.IsVisible = true;
-            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Annuler", null, "2min", "5min", "10min");
             switch (rep)
             {
                 case "2min":
@@ -348,7 +357,7 @@ public partial class GestionMatch : ContentPage
                 case "10min":
                     chrPenalite2 = new Chronometre(10, 0, 1);
                     break;
-                case "Cancel":
+                case "Annuler":
                     cbx.IsChecked = false;
                     boxPenalite2.IsVisible = false;
                     break;
@@ -373,7 +382,7 @@ public partial class GestionMatch : ContentPage
         {
             // Affiche la penalité
             boxPenalite3.IsVisible = true;
-            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Annuler", null, "2min", "5min", "10min");
             switch (rep)
             {
                 case "2min":
@@ -385,7 +394,7 @@ public partial class GestionMatch : ContentPage
                 case "10min":
                     chrPenalite3 = new Chronometre(10, 0, 1);
                     break;
-                case "Cancel":
+                case "Annuler":
                     cbx.IsChecked = false;
                     boxPenalite3.IsVisible = false;
                     break;
@@ -410,7 +419,7 @@ public partial class GestionMatch : ContentPage
         {
             // Affiche la penalité
             boxPenalite4.IsVisible = true;
-            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Annuler", null, "2min", "5min", "10min");
             switch (rep)
             {
                 case "2min":
@@ -422,7 +431,7 @@ public partial class GestionMatch : ContentPage
                 case "10min":
                     chrPenalite4 = new Chronometre(10, 0, 1);
                     break;
-                case "Cancel":
+                case "Annuler":
                     cbx.IsChecked = false;
                     boxPenalite4.IsVisible = false;
                     break;
@@ -447,7 +456,7 @@ public partial class GestionMatch : ContentPage
         {
             // Affiche la penalité
             boxPenalite5.IsVisible = true;
-            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Annuler", null, "2min", "5min", "10min");
             switch (rep)
             {
                 case "2min":
@@ -459,7 +468,7 @@ public partial class GestionMatch : ContentPage
                 case "10min":
                     chrPenalite5 = new Chronometre(10, 0, 1);
                     break;
-                case "Cancel":
+                case "Annuler":
                     cbx.IsChecked = false;
                     boxPenalite5.IsVisible = false;
                     break;
@@ -484,7 +493,7 @@ public partial class GestionMatch : ContentPage
         {
             // Affiche la penalité
             boxPenalite6.IsVisible = true;
-            string rep = await DisplayActionSheet("Durée de la pénalité :", "Cancel", null, "2min", "5min", "10min");
+            string rep = await DisplayActionSheet("Durée de la pénalité :", "Annuler", null, "2min", "5min", "10min");
             switch (rep)
             {
                 case "2min":
@@ -496,7 +505,7 @@ public partial class GestionMatch : ContentPage
                 case "10min":
                     chrPenalite6 = new Chronometre(10, 0, 1);
                     break;
-                case "Cancel":
+                case "Annuler":
                     cbx.IsChecked = false;
                     boxPenalite5.IsVisible = false;
                     break;
@@ -521,36 +530,36 @@ public partial class GestionMatch : ContentPage
     // Méthode pour ajouter un point à l'équipe 1
     private void OnbtnPointPlusEquipe1Clicked(object sender, EventArgs e)
     {        
-        iPointsEquipe1++;
-        lblPointEquipe1.Text = $"{iPointsEquipe1}"; 
+        iScoreEquipe1++;
+        lblPointEquipe1.Text = $"{iScoreEquipe1}"; 
     }
     
     // Méthode pour enlever un point à l'équipe 1
     private void OnbtnPointMoinsEquipe1Clicked(object sender, EventArgs e)
     {
         // Vérification si le score est supérieur à 0 car on ne peut pas avoir de score négatif
-        if (iPointsEquipe1 > 0)
+        if (iScoreEquipe1 > 0)
         {
-            iPointsEquipe1--;
-            lblPointEquipe1.Text = $"{iPointsEquipe1}";
+            iScoreEquipe1--;
+            lblPointEquipe1.Text = $"{iScoreEquipe1}";
         }
     }
 
     // Méthode pour ajouter un point à l'équipe 2
     private void OnbtnPointPlusEquipe2Clicked(object sender, EventArgs e)
     {
-        iPointsEquipe2++;
-        lblPointEquipe2.Text = $"{iPointsEquipe2}";
+        iScoreEquipe2++;
+        lblPointEquipe2.Text = $"{iScoreEquipe2}";
     }
 
     // Méthode pour enlever un point à l'équipe 2
     private void OnbtnPointMoinsEquipe2Clicked(object sender, EventArgs e)
     {
         // Vérification si le score est supérieur à 0 car on ne peut pas avoir de score négatif
-        if (iPointsEquipe2 > 0)
+        if (iScoreEquipe2 > 0)
         {
-            iPointsEquipe2--;
-            lblPointEquipe2.Text = $"{iPointsEquipe2}";
+            iScoreEquipe2--;
+            lblPointEquipe2.Text = $"{iScoreEquipe2}";
         }
     }
 

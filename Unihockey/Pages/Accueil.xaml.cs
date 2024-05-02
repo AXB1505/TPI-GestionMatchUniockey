@@ -14,14 +14,23 @@ public partial class Accueil : ContentPage
 	{
 		int iPeriode = 1;
 		int iDureePeriode = 24;
-		Navigation.PushAsync(new GestionMatch(iPeriode, iDureePeriode));
+		Navigation.PushAsync(new GestionMatch(iPeriode, iDureePeriode, new Categorie("Juniors E")));
     }
 
-    private void OnbtnCreerMatch2x20Clicked(object sender, EventArgs e)
+    private async void OnbtnCreerMatch2x20Clicked(object sender, EventArgs e)
     {
         int iPeriode = 2;
         int iDureePeriode = 20;
-        Match match = new Match();
-        Navigation.PushAsync(new GestionMatch(iPeriode, iDureePeriode));
+
+        string strRep = await DisplayActionSheet("Choisir la catégorie", "Annuler", null, "Juniors D", "Juniors C", "Juniors B", "Juniors A", "Homme", "Femme");
+
+        if (strRep == "Annuler" || strRep == null)
+        {
+            return;
+        }
+
+        Categorie catCategorie = new Categorie(strRep);
+
+        Navigation.PushAsync(new GestionMatch(iPeriode, iDureePeriode, catCategorie));
     }
 }
