@@ -80,7 +80,7 @@ public partial class GestionMatch : ContentPage
         // Lancement de la fonction asynchrone pour la mise à jour des labels des chronomètres
         UpdateLabels();
 
-        // Remplissage des listes déroulantes des équipes avec les équipes de la base de données
+        // Ajout de la liste d'équipes dans les pickers
         pickEquipe1.ItemsSource = listEquipes;
         pickEquipe2.ItemsSource = listEquipes;
     }
@@ -300,15 +300,33 @@ public partial class GestionMatch : ContentPage
     {
         // Récupération du picker qui a déclenché l'événement
         Picker pick = (Picker)sender;
-
-        // Vérification que les 2 équipes ne soit pas les mêmes
-        if (pickEquipe1.SelectedItem == pickEquipe2.SelectedItem)
+        
+        // Vérification que les 2 équipes ne soit pas les mêmes et que la valeur ne soit pas null pour ne pas afficher d'erreur inutilement
+        if (pickEquipe1.SelectedItem == pickEquipe2.SelectedItem && pickEquipe1.SelectedItem != null && pickEquipe2.SelectedItem != null)
         {
             // Affichage d'un message d'erreur
             DisplayAlert("Erreur", "Vous ne pouvez pas choisir la même équipe pour les deux équipes.", "OK");
             // Remise à zéro de la liste déroulante
             pick.SelectedItem = null;
         }
+    }
+
+    // Méthode pour redirigez sur une la page de création d'équipe
+    private void OnbtnAjouterEquipeClicked(object sender, EventArgs e)
+    {
+        // Ouverture de la fenêtre d'ajout d'équipe
+        Navigation.PushAsync(new CreerEquipe(new ListView())); // Creation d'un ListView non utilisé
+    }
+
+    // Méthode pour recharger les équipes des pickers
+    private void OnbtnRechargerEquipeClicked(object sender, EventArgs e)
+    {
+        // Rechargement des équipes
+        listEquipes = new List<Equipe>(new Equipe().GetList().Where(x => x.getCategorie().getNom() == _Categorie.getNom()));
+
+        // Rechargement des pickers
+        pickEquipe1.ItemsSource = listEquipes;
+        pickEquipe2.ItemsSource = listEquipes;
     }
 
 

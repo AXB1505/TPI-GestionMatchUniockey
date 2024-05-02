@@ -13,12 +13,6 @@
                 ContentTemplate="{DataTemplate local:Accueil}"
                 Route="Accueil" />
         </Tab>
-        <Tab Title="MainPage">
-            <ShellContent
-                Title="MainPage"
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage" />
-        </Tab>
         <Tab Title="Resultats">
             <ShellContent
                 Title="Resultats"
