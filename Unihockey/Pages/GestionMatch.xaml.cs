@@ -15,6 +15,11 @@ public partial class GestionMatch : ContentPage
     // Instanciation de la categorie du match
     private Categorie _Categorie = new Categorie();
 
+    // Instanciaition de la variable du début du match
+    private DateTime dtDebutMatch = DateTime.Now;
+    // Instanciation de la variable pour vérifier si le match est lancé pour la première fois
+    private bool bMatchLancePremiereFois = false;
+
     // Variables de contrôle que le match est terminé
     private bool bMatchFini = false;
 
@@ -89,6 +94,10 @@ public partial class GestionMatch : ContentPage
     {
         if (chrPrincipal.getEstFini() == false)
         {
+            if (bMatchLancePremiereFois == false)
+            {
+                dtDebutMatch = DateTime.Now;
+            }
             chrPrincipal.Start();
             chrTempsMort.Pause();
             // Check si la pénalité est en cours et démarrage du chronomètre de pénalité si nécessaire pour chaque pénalité
@@ -139,22 +148,31 @@ public partial class GestionMatch : ContentPage
             "Ceci entrainera l'enregistrement des résultats et vous ne pourez plus retourner en arrière.", "Oui", "Non");
         if (rep)
         {
-            // Enregistrement des résultats
-            // A faire
-            _Match = new Match((Equipe)pickEquipe1.SelectedItem, (Equipe)pickEquipe2.SelectedItem, iScoreEquipe1, iScoreEquipe2);
+            if (pickEquipe1.SelectedItem == null && pickEquipe2 == null)
+            {
+                await DisplayAlert("Erreur", "Veuillez choisir les équipes avant d'arrêter le match.", "OK");
+            }
+            else
+            {
+                // Insértion du match dans la base de données
+                _Match = new Match((Equipe)pickEquipe1.SelectedItem, (Equipe)pickEquipe2.SelectedItem, iScoreEquipe1, iScoreEquipe2, dtDebutMatch);
+                _Match.Create();
 
-            // Redirection sur une nouvelle page de gestion de match pour un nouveau match (demandé par le client)
-            await Navigation.PushAsync(new GestionMatch(chrPrincipal.getNombrePeriode(), chrPrincipal.getMinutesPeriode(), _Categorie));
-            // Supression de la page active de gestion du match
-            Navigation.RemovePage(this);
+                // Redirection sur une nouvelle page de gestion de match pour un nouveau match (demandé par le client)
+                await Navigation.PushAsync(new GestionMatch(chrPrincipal.getNombrePeriode(), chrPrincipal.getMinutesPeriode(), _Categorie));
+                // Supression de la page active de gestion du match
+                Navigation.RemovePage(this);
+            }
         }
     }
 
     // Méthode pour le changement de chronomètrage entre croissant et décroissant
     private void OnCbxCroissantCheckedChanged(object sender, EventArgs e)
     {
+        // Récupération de la checkbox qui a déclenché l'événement
         CheckBox cbx = (CheckBox)sender;
         chrPrincipal.setCroissant(cbx.IsChecked);
+
         lblChrPrincipal.Text = chrPrincipal.GetTempsRestant();
     }
 
@@ -280,7 +298,10 @@ public partial class GestionMatch : ContentPage
     // Méthode pour la vérification du choix des équipes (ne peuvent pas être les mêmes)
     private void OnpickEquipeSelectedItemChanged(object sender, EventArgs e)
     {
+        // Récupération du picker qui a déclenché l'événement
         Picker pick = (Picker)sender;
+
+        // Vérification que les 2 équipes ne soit pas les mêmes
         if (pickEquipe1.SelectedItem == pickEquipe2.SelectedItem)
         {
             // Affichage d'un message d'erreur

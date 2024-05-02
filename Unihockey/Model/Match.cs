@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel.DataTransfer;
-using Npgsql;
+﻿using Npgsql;
 
 namespace Unihockey.Model
 {
@@ -18,22 +12,13 @@ namespace Unihockey.Model
 
         public string Equipe1 { get => equEquipe1.getNom(); }
         public string Equipe2 { get => equEquipe2.getNom(); }
-        public string DebutMatch { get => dtDebutMatch.ToString(); }
+        public string DebutMatch { get => dtDebutMatch.ToString("dd'.'MM'.'yyyy' 'HH':'mm':'ss"); }
         public string ScoreEquipe1 { get => iScoreEquipe1.ToString(); }
         public string ScoreEquipe2 { get => iScoreEquipe2.ToString(); }
 
     PostgresBdService _db = new PostgresBdService();
 
         public Match() { }
-
-        public Match(Equipe equipe1, Equipe equipe2, int scoreEquipe1, int scoreEquipe2)
-        {
-            equEquipe1 = equipe1;
-            equEquipe2 = equipe2;
-            iScoreEquipe1 = scoreEquipe1;
-            iScoreEquipe2 = scoreEquipe2;
-            dtDebutMatch = DateTime.Now;
-        }
 
         public Match(Equipe equipe1, Equipe equipe2, int scoreEquipe1, int scoreEquipe2, DateTime debutMatch)
         {
@@ -44,16 +29,16 @@ namespace Unihockey.Model
             dtDebutMatch = debutMatch;
         }
 
-        public string getEquipe1()
+        public Equipe getEquipe1()
         {
-            return equEquipe1.getNom();
+            return equEquipe1;
         }
         public Equipe getEquipe2()
         {
                return equEquipe2;
         }
 
-        public DateTime getDate()
+        public DateTime getDateDebut()
         {
             return dtDebutMatch;
         }
@@ -91,6 +76,22 @@ namespace Unihockey.Model
 
             return matches;
         }
+
+        public void Create()
+        {
+            // Instanciation de la requête pour ajouter un match à la base de données
+            NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO Match (Equ_num1, Equ_num2, scoreEquipe1, scoreEquipe2, debutMatch) " +
+                               "VALUES ("+ this.getEquipe1().getId() +"," + this.getEquipe2().getId() + "," + this.getScoreEquipe1() +
+                               "," + this.getScoreEquipe2() + "," + "'" + dtDebutMatch.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + "'" + ");", _db.GetConnection());
+
+            _db.OpenConnection();
+
+            // Exécution de la requête
+            cmd.ExecuteNonQuery();
+
+            _db.CloseConnection();
+        }
+
 
         public override string ToString()
         {
