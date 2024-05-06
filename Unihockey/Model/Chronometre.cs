@@ -133,8 +133,6 @@ namespace Unihockey.Model
             // Verification que le temps est écoulé
             if (chrono.Elapsed >= dureeActuel)
             {
-                // Si le temps est écoulé, on arrête le chronomètre et on le réinitialise
-                chrono.Reset();
                 // Verification qu'il y ait 2 périodes
                 if (nombrePeriode == 2)
                 {
@@ -156,7 +154,11 @@ namespace Unihockey.Model
                 {
                     // Si il y a 1 période le chronomètre est fini (pour le chronomètre principal)
                     estFini = true;
+                    return "00:00";
                 }
+                // Si le temps est écoulé, on arrête le chronomètre et on le réinitialise
+                chrono.Reset();
+                
                 // Retour du temps restant réinitialiser
                 return getTempsReset();
             }

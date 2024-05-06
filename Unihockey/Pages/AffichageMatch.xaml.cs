@@ -35,6 +35,7 @@ public partial class AffichageMatch : ContentPage
             lblPointEquipe1.Text = labelsParent[7].Text;
             lblPointEquipe2.Text = labelsParent[8].Text;
             lblchrTempsMort.Text = labelsParent[9].Text;
+            lblPeriode.Text = labelsParent[10].Text;
             Equipe equEquipe1 = (Equipe)pickersParent[0].SelectedItem;
             Equipe equEquipe2 = (Equipe)pickersParent[1].SelectedItem;
             if (equEquipe1 != null && equEquipe2 != null)
@@ -44,7 +45,7 @@ public partial class AffichageMatch : ContentPage
             }
 
 
-            // Check de l'affichage des pénalités en fonction des checkbox de la page de gestion du match
+            // Check de l'affichage des chronomètres en fonction des checkbox de la page de gestion du match
             if (checkBoxesParent[0].IsChecked)
             {
                 boxPenalite1.IsVisible = true;

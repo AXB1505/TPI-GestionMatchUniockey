@@ -26,15 +26,15 @@ public partial class ModifierEquipe : ContentPage
             DisplayAlert("Erreur", "Veuillez remplir tous les champs", "OK");
             return;
         }
-        Equipe equNewEquipe = new Equipe(tbxNom.Text, (Categorie)pickCategorie.SelectedItem);
+        Equipe equNouvelleEquipe = new Equipe(tbxNom.Text, (Categorie)pickCategorie.SelectedItem);
 
         try
         {
-            equEquipe.Edit(equNewEquipe);
+            equEquipe.Edit(equNouvelleEquipe);
         }
-        catch (Exception ex)
+        catch
         {
-            DisplayAlert("Erreur", ex.Message, "OK");
+            DisplayAlert("Erreur de saisie", $"Il existe déjà une entrée {equNouvelleEquipe}", "OK");
             return;
         }
 

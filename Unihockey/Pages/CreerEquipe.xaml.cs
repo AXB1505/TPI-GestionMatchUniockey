@@ -23,9 +23,9 @@ public partial class CreerEquipe : ContentPage
         {
             equEquipe.Create();
         }
-        catch (Exception ex)
+        catch
         {
-            DisplayAlert("Erreur", ex.Message, "OK");
+            DisplayAlert("Erreur de saisie", $"Il existe déjà une entrée {equEquipe}", "OK");
             return;
         }
         lvListView.ItemsSource = new Equipe().GetList();

@@ -51,6 +51,12 @@
             <Style x:Key="btnPenalite" TargetType="Button">
                 <Setter Property="FontSize" Value="10"/>
                 <Setter Property="WidthRequest" Value="80"/>
+                <Setter Property="HeightRequest" Value="25"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
+                <Setter Property="PlaceholderColor" Value="Gray"></Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

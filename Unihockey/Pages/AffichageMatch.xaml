@@ -8,19 +8,32 @@
 
     <!-- Grille de disposition de la page de chronomètrage -->
     <Grid RowDefinitions="3*,1*,2*">
+
         <Grid Grid.Row="0"
-              RowDefinitions="6*,*">
+              RowDefinitions="8*,2*">
 
             <!-- Chronometre principal -->
-
             <Border Grid.Row="0"
                     Style="{StaticResource ChronometreStyle}"
                     WidthRequest="800"
-                    Margin="20,20,20,0">
+                    Margin="0,20">
                 <Label x:Name="lblChrPrincipal"
-                       Text="00:00"
-                       FontSize="250"/>
+                   Text="00:00"
+                   FontSize="250"/>
             </Border>
+            <HorizontalStackLayout Grid.Row="1"
+                                   HorizontalOptions="Center"
+                                   Spacing="10">
+                <Label Text="Période :"/>
+                <Border Grid.Row="1"
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    BackgroundColor="White">
+                    <Label x:Name="lblPeriode"
+                           Text="1"
+                           FontSize="35"/>
+                </Border>
+            </HorizontalStackLayout>
         </Grid>
 
         <!-- Grille de disposition du nom des équipes et du titre "Pénalité"-->
@@ -69,6 +82,8 @@
                                              IsVisible="False">
                             <Border Style="{StaticResource ChronometreStyle}">
                                 <Label Text="00:00"
+                                       FontSize="40"
+                                       Margin="5"
                                        x:Name="lblPenalite1"/>
                             </Border>
                         </VerticalStackLayout>
@@ -82,6 +97,8 @@
                                          IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
+                                   FontSize="40"
+                                   Margin="5"
                                    x:Name="lblPenalite2"/>
                         </Border>
                     </VerticalStackLayout>
@@ -94,6 +111,8 @@
                                          IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
+                                   FontSize="40"
+                                   Margin="5"
                                    x:Name="lblPenalite3"/>
                         </Border>
                     </VerticalStackLayout>
@@ -106,6 +125,8 @@
                                          IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
+                                   FontSize="40"
+                                   Margin="5"
                                    x:Name="lblPenalite4"/>
                         </Border>
                     </VerticalStackLayout>
@@ -118,6 +139,8 @@
                                          IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
+                                   FontSize="40"
+                                   Margin="5"
                                    x:Name="lblPenalite5"/>
                         </Border>
                     </VerticalStackLayout>
@@ -130,6 +153,8 @@
                                          IsVisible="False">
                         <Border Style="{StaticResource ChronometreStyle}">
                             <Label Text="00:00"
+                                   FontSize="40"
+                                   Margin="5"
                                    x:Name="lblPenalite6"/>
                         </Border>
                     </VerticalStackLayout>

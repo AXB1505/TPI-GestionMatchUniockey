@@ -2,10 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Unihockey.Pages.ResultatsMatchs"
-             Title="ResultatsMatchs"
-             x:Name="PageResultatsMatchs"
-             Style="{StaticResource PagesStyle}"
-             BindingContext="{x:Reference PageResultatsMatchs}">
+             Style="{StaticResource PagesStyle}">
     
     <FlexLayout Direction="Column"
                 AlignItems="Center">
@@ -15,26 +12,36 @@
             HorizontalOptions="Center" 
             FontSize="Large"
             TextDecorations="Underline"
-            Margin="20"/>
-        
+            Margin="10"/>
+
+        <Button Text="Recharger la liste"
+                Clicked="OnbtnRechargerClicked"
+                WidthRequest="200"
+                HeightRequest="40"
+                Margin="0,0,0,10">
+            
+        </Button>
+
         <Grid ColumnDefinitions="400,400,120,150"
-              HorizontalOptions="Center">
-            <Border Grid.Column="0" Background="White">
+              HorizontalOptions="Center"
+              BackgroundColor="LightBlue">
+            <Border Grid.Column="0">
                 <Label Text="Equipe 1" TextDecorations="Underline" />
             </Border>
-            <Border Grid.Column="1" Background="White">
+            <Border Grid.Column="1">
                 <Label Text="Equipe 2" TextDecorations="Underline" />
             </Border>
-            <Border Grid.Column="2" Background="White">
+            <Border Grid.Column="2">
                 <Label Text="Score" TextDecorations="Underline" />
             </Border>
-            <Border Grid.Column="3" Background="White">
+            <Border Grid.Column="3">
                 <Label Text="Date" TextDecorations="Underline" />
             </Border>
         </Grid>
-        
+
         <ListView x:Name="lvMatchs"
-                  WidthRequest="1070">
+                  WidthRequest="1070"
+                  HeightRequest="400">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

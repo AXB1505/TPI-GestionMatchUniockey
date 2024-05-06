@@ -8,7 +8,6 @@
     <VerticalStackLayout HorizontalOptions="Center">
         <Label 
             Text="Application de gestion de match d'Unihockey"
-            VerticalOptions="Center" 
             HorizontalOptions="Center"
             Margin="0, 50, 0, 0"
             FontSize="Header"/>
@@ -19,15 +18,17 @@
                 Text="1x24 minutes"
                 Clicked="OnbtnCreerMatch1x24Clicked"
                 FontSize="Title"
-                WidthRequest="350"
-                HeightRequest="350"
+                WidthRequest="300"
+                HeightRequest="300"
+                Background="White"
                 Margin="20"/>
             <Button
                 Text="2x20 minutes"
                 Clicked="OnbtnCreerMatch2x20Clicked"
                 FontSize="Title"
-                WidthRequest="350"
-                HeightRequest="350"
+                WidthRequest="300"
+                HeightRequest="300"
+                Background="White"
                 Margin="20"/>
 
         </HorizontalStackLayout>

@@ -9,7 +9,7 @@ namespace Unihockey.Model
 {
     internal class Categorie
     {
-        // Instanciation des variables en fonction des colonnes de la table Catégorie de la base de données
+        // Instanciation des attributs en fonction des colonnes de la table Catégorie de la base de données
         private string strNom;
 
         // Instanciation de la connexion à la base de données
@@ -77,25 +77,6 @@ namespace Unihockey.Model
 
             return id;
         }
-
-        public void getCategorieByID(int id)
-        {
-            Categorie c = new Categorie();
-            _db.OpenConnection();
-
-            // Instanciation de la requête pour obtenir la catégorie en fonction de l'ID
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM categorie WHERE num=" + id + ";", _db.GetConnection());
-
-            // Exécution de la requête
-            NpgsqlDataReader reader = cmd.ExecuteReader();
-
-            // Lecture du retour de la requête et assignation de la catégorie
-            reader.Read();
-            c.strNom = reader["nom"].ToString();
-
-            _db.CloseConnection();
-        }
-
 
         // Méthode pour obtenir la catégorie en format string
         public override string ToString()

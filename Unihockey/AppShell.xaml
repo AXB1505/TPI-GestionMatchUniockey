@@ -15,13 +15,11 @@
         </Tab>
         <Tab Title="Resultats">
             <ShellContent
-                Title="Resultats"
                 ContentTemplate="{DataTemplate local:ResultatsMatchs}"
                 Route="ResultatsMatchs"/>
         </Tab>
         <Tab Title="Equipes">
             <ShellContent
-                Title="Equipes"
                 ContentTemplate="{DataTemplate local:GestionEquipes}"
                 Route="GestionEquipes" />
         </Tab>

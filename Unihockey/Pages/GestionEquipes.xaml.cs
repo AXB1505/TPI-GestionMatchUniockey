@@ -7,13 +7,17 @@ public partial class GestionEquipes : ContentPage
 	public GestionEquipes()
 	{
 		InitializeComponent();
-        BindingContext = new Equipe().GetList();
 		lvEquipes.ItemsSource = new Equipe().GetList();
     }
 
     private void OnbtnCreerClicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new CreerEquipe(lvEquipes));
+    }
+
+    private void OnbtnRechargerClicked(object sender, EventArgs e)
+    {
+        lvEquipes.ItemsSource = new Equipe().GetList();
     }
 
     private async void OnlvEquipesItemSelected(object sender, SelectedItemChangedEventArgs e)

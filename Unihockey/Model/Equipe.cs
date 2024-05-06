@@ -9,9 +9,13 @@ namespace Unihockey.Model
 {
     internal class Equipe
     {
-        // Instanciation des variables en fonction des colonnes de la table Equipe de la base de données
+        // Instanciation des attributs en fonction des colonnes de la table Equipe de la base de données
         private string strNom = "";
         private Categorie _categorie = new Categorie();
+
+        // Propriétés pour obtenir les valeurs des variables en string et les afficher dans les vues
+        public string Nom { get => getNom();}
+        public string Categorie { get => _categorie.getNom();}
 
         // Instanciation de la connexion à la base de données
         private PostgresBdService _db = new PostgresBdService();
@@ -45,8 +49,8 @@ namespace Unihockey.Model
         {
             List<Equipe> equipes = new List<Equipe>();
 
-            // Instanciation de la requête pour obtenir toutes les équipes de la base de données
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM Equipe", _db.GetConnection());
+            // Instanciation de la requête pour obtenir toutes les équipes de la base de données triées par catégorie et nom
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM Equipe ORDER BY Cat_num, nom", _db.GetConnection());
 
             _db.OpenConnection();
 
@@ -56,26 +60,12 @@ namespace Unihockey.Model
             // Boucle pour ajouter chaque équipe à la liste avec le retour de la requête
             while (reader.Read())
             {
-                equipes.Add(new Equipe(reader["nom"].ToString(), new Categorie(_categorie.GetList()[(int)reader["cat_num"] - 1].getNom())));
+                equipes.Add(new Equipe(reader["nom"].ToString(), new Categorie().GetList().Find(x => x.getId() == (int)reader["Cat_num"])));
             }
 
             _db.CloseConnection();
 
             return equipes;
-        }
-
-        // Méthode pour créer une équipe
-        public void Create()
-        {
-            // Instanciation de la requête pour ajouter une équipe à la base de données
-            NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO Equipe(nom, cat_num) VALUES('" + this.getNom() +"', '" + this.getCategorie().getId() + "');", _db.GetConnection());
-
-            _db.OpenConnection();
-
-            // Exécution de la requête
-            cmd.ExecuteNonQuery();
-
-            _db.CloseConnection();
         }
 
         // Méthode pour obtenir l'ID de l'équipe
@@ -100,11 +90,26 @@ namespace Unihockey.Model
             return id;
         }
 
+        // Méthode pour créer une équipe
+        public void Create()
+        {
+            // Instanciation de la requête pour ajouter une équipe à la base de données
+            NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO Equipe(nom, cat_num) VALUES('" + this.getNom() +"', '" + this.getCategorie().getId() + "');", _db.GetConnection());
+
+            _db.OpenConnection();
+
+            // Exécution de la requête
+            cmd.ExecuteNonQuery();
+
+            _db.CloseConnection();
+        }
+
         // Méthode pour modifier une équipe
         public void Edit(Equipe equipe)
         {
             // Instanciation de la requête pour modifier une équipe de la base de données en fonction de son ID
-            NpgsqlCommand cmd = new NpgsqlCommand("UPDATE Equipe SET nom='" + equipe.getNom() + "', cat_num='" + equipe.getCategorie().getId() + "' WHERE num=" + this.getId() + ";", _db.GetConnection());
+            NpgsqlCommand cmd = new NpgsqlCommand("UPDATE Equipe SET nom='" + equipe.getNom() + "', cat_num='" 
+                + equipe.getCategorie().getId() + "' WHERE num=" + this.getId() + ";", _db.GetConnection());
 
             _db.OpenConnection();
 

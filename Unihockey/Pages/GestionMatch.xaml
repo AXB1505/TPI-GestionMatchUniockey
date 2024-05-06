@@ -4,29 +4,37 @@
              x:Class="Unihockey.Pages.GestionMatch"
              xmlns:controls="clr-namespace:Unihockey.Pages.Controls"
              Style="{StaticResource PagesStyle}">
+
     <!--Title="GestionMatch"-->
 
-    <!-- Grille de disposition de la page de chronomètrage -->
+    <!--Grille de disposition de la page de chronomètrage-->
     <Grid RowDefinitions="3*,1*,2*">
+        
         <Grid Grid.Row="0"
               RowDefinitions="6*,*">
 
-            <!-- Chronometre principal -->
-
-            <Border Grid.Row="0"
-                    Style="{StaticResource ChronometreStyle}"
-                    WidthRequest="700"
+            <!--Chronometre principal et période-->
+            <VerticalStackLayout Grid.Row="0">
+                <Border Style="{StaticResource ChronometreStyle}"
+                    WidthRequest="630"
                     Margin="20,20,20,0">
-                <Label x:Name="lblChrPrincipal"
+                    <Label x:Name="lblChrPrincipal"
                        Text="00:00"
                        FontSize="150"/>
-            </Border>
+                </Border>
+                <Border WidthRequest="40"
+                        HeightRequest="40"
+                        BackgroundColor="White">
+                    <Label x:Name="lblPeriode"
+                           Text="1"/>
+                </Border>
+            </VerticalStackLayout>
 
-            <!-- Emplacement des boutons du chronomètre principal -->
+            <!--Emplacement des boutons du chronomètre principal-->
             <HorizontalStackLayout Grid.Row="1" 
                                    BackgroundColor="Transparent"
                                    HorizontalOptions="Center"
-                                   Spacing="14">
+                                   Spacing="10">
                 <Button x:Name="btnPlay"
                         Text="Play"
                         Clicked="OnbtnPlayClicked"
@@ -51,7 +59,7 @@
             </HorizontalStackLayout>
         </Grid>
 
-        <!-- Grille de disposition des équipes et du temps mort-->
+        <!--Grille de disposition des équipes et du temps mort-->
         <Grid Grid.Row="1"
               ColumnDefinitions="*,2*,*"
               Padding="0,0,0,5">
@@ -74,11 +82,10 @@
 
             </Grid>
             
-            <!--Conteneur du temps mort-->
+            <!--Conteneur du chronomètre de temps mort-->
             <VerticalStackLayout Grid.Column="1">
                 <Border Style="{StaticResource ChronometreStyle}"
-                        WidthRequest="300"
-                        Margin="20,20,20,0">
+                        WidthRequest="300">
                     <Label x:Name="lblChrTempsMort"
                        Text="00:00"
                        FontSize="20"/>
@@ -87,14 +94,16 @@
                                    BackgroundColor="Transparent"
                                    HorizontalOptions="Center"
                                    Spacing="14">
-                    <Button x:Name="btnPlayTempsMort"
-                        Text="Play"
-                        Clicked="OnbtnPlayTempsMortClicked"
-                        Style="{StaticResource btnPenalite}"/>
-                    <Button x:Name="btnPauseTempsMort"
-                        Text="Pause"
-                        Clicked="OnbtnPauseTempsMortClicked"
-                        Style="{StaticResource btnPenalite}"/>
+                    <Button Text="Play"
+                            Clicked="OnbtnPlayTempsMortClicked"
+                            Style="{StaticResource btnPenalite}"/>
+                    <Button Text="Pause"
+                            Clicked="OnbtnPauseTempsMortClicked"
+                            Style="{StaticResource btnPenalite}"/>
+                    <Button Text="Stop"
+                            Clicked="OnbtnStopTempsMortClicked"
+                            Style="{StaticResource btnPenalite}"
+                            />
                     <HorizontalStackLayout>
                         <CheckBox x:Name="cbxTempsMort"/>
                         <Label Text="Afficher ?"

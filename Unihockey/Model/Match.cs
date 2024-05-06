@@ -4,22 +4,26 @@ namespace Unihockey.Model
 {
     internal class Match
     {
+        // Instanciation des attributs en fonction des colonnes de la table Catégorie de la base de données
         private Equipe equEquipe1;
         private Equipe equEquipe2;
         private DateTime dtDebutMatch;
         private int iScoreEquipe1;
         private int iScoreEquipe2;
 
-        public string Equipe1 { get => equEquipe1.getNom(); }
-        public string Equipe2 { get => equEquipe2.getNom(); }
-        public string DebutMatch { get => dtDebutMatch.ToString("dd'.'MM'.'yyyy' 'HH':'mm':'ss"); }
-        public string ScoreEquipe1 { get => iScoreEquipe1.ToString(); }
-        public string ScoreEquipe2 { get => iScoreEquipe2.ToString(); }
+        // Paramètres pour le Binding (liaision) de données dans l'affichage des résultats des matchs (ResultatsMatchs)
+        public string Equipe1 { get => getEquipe1().getNom(); }
+        public string Equipe2 { get => getEquipe2().getNom(); }
+        public string DebutMatch { get => getDateDebut().ToString("dd'.'MM'.'yyyy' 'HH':'mm':'ss"); }
+        public string ScoreEquipe1 { get => getScoreEquipe1().ToString(); }
+        public string ScoreEquipe2 { get => getScoreEquipe2().ToString(); }
 
-    PostgresBdService _db = new PostgresBdService();
+        private PostgresBdService _db = new PostgresBdService();
 
+        // Constructeur vide
         public Match() { }
 
+        // Constructeur avec paramètres
         public Match(Equipe equipe1, Equipe equipe2, int scoreEquipe1, int scoreEquipe2, DateTime debutMatch)
         {
             equEquipe1 = equipe1;
@@ -29,6 +33,7 @@ namespace Unihockey.Model
             dtDebutMatch = debutMatch;
         }
 
+        // Méthodes pour obtenir l'equipe1, l'equipe2, la date de début, le score de l'équipe 1 et le score de l'équipe 2
         public Equipe getEquipe1()
         {
             return equEquipe1;
@@ -58,7 +63,7 @@ namespace Unihockey.Model
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT Equipe1.nom as equipe1, Equipe2.nom as equipe2, " +
                 "Match.scoreEquipe1 as scoreEquipe1, Match.scoreEquipe2 as scoreEquipe2, Match.debutMatch as " +
                 "debutMatch FROM Match, Equipe Equipe1, Equipe Equipe2 Where Match.Equ_num1 = Equipe1.num AND " +
-                "Equ_num2 = Equipe2.num;", _db.GetConnection());
+                "Equ_num2 = Equipe2.num ORDER BY debutMatch DESC;", _db.GetConnection());
 
             _db.OpenConnection();
 
@@ -82,7 +87,7 @@ namespace Unihockey.Model
             // Instanciation de la requête pour ajouter un match à la base de données
             NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO Match (Equ_num1, Equ_num2, scoreEquipe1, scoreEquipe2, debutMatch) " +
                                "VALUES ("+ this.getEquipe1().getId() +"," + this.getEquipe2().getId() + "," + this.getScoreEquipe1() +
-                               "," + this.getScoreEquipe2() + "," + "'" + dtDebutMatch.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + "'" + ");", _db.GetConnection());
+                               "," + this.getScoreEquipe2() + "," + "'" + this.getDateDebut().ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss") + "'" + ");", _db.GetConnection());
 
             _db.OpenConnection();
 
