@@ -1,4 +1,6 @@
-﻿namespace Unihockey
+﻿using Unihockey.Pages;
+
+namespace Unihockey
 {
     public partial class App : Application
     {

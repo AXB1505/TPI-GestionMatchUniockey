@@ -106,30 +106,33 @@ public partial class GestionMatch : ContentPage
             }
             chrPrincipal.Start();
             chrTempsMort.Pause();
-            // Check si la pénalité est en cours et démarrage du chronomètre de pénalité si nécessaire pour chaque pénalité
-            if (chrPenalite1.getTempsReset() != chrPenalite1.GetTempsRestant())
+            if (chrPrincipal.getNombrePeriode() != 0)
             {
-                chrPenalite1.Start();
-            }
-            if (chrPenalite2.getTempsReset() != chrPenalite2.GetTempsRestant())
-            {
-                chrPenalite2.Start();
-            }
-            if (chrPenalite3.getTempsReset() != chrPenalite3.GetTempsRestant())
-            {
-                chrPenalite3.Start();
-            }
-            if (chrPenalite4.getTempsReset() != chrPenalite4.GetTempsRestant())
-            {
-                chrPenalite4.Start();
-            }
-            if (chrPenalite5.getTempsReset() != chrPenalite5.GetTempsRestant())
-            {
-                chrPenalite5.Start();
-            }
-            if (chrPenalite6.getTempsReset() != chrPenalite6.GetTempsRestant())
-            {
-                chrPenalite6.Start();
+                // Check si la pénalité est en cours et démarrage du chronomètre de pénalité si nécessaire pour chaque pénalité
+                if (chrPenalite1.getTempsReset() != chrPenalite1.GetTempsRestant())
+                {
+                    chrPenalite1.Start();
+                }
+                if (chrPenalite2.getTempsReset() != chrPenalite2.GetTempsRestant())
+                {
+                    chrPenalite2.Start();
+                }
+                if (chrPenalite3.getTempsReset() != chrPenalite3.GetTempsRestant())
+                {
+                    chrPenalite3.Start();
+                }
+                if (chrPenalite4.getTempsReset() != chrPenalite4.GetTempsRestant())
+                {
+                    chrPenalite4.Start();
+                }
+                if (chrPenalite5.getTempsReset() != chrPenalite5.GetTempsRestant())
+                {
+                    chrPenalite5.Start();
+                }
+                if (chrPenalite6.getTempsReset() != chrPenalite6.GetTempsRestant())
+                {
+                    chrPenalite6.Start();
+                }
             }
         }
     }
@@ -641,14 +644,24 @@ public partial class GestionMatch : ContentPage
                 }
                 else if (chrPrincipal.getNombrePeriode() == 0)
                 {
-                    lblPeriode.Text = "-";
+                    lblPeriode.Text = "Pause";
                 }
                 else
                 {
-                    lblPeriode.Text = "1";
+                    lblPeriode.Text = "2";
                 }
             }
 
+            // Mise en pause des chronomètres de pénalité si on est en pause
+            if (chrPrincipal.getNombrePeriode() == 0)
+            {
+                chrPenalite1.Pause();
+                chrPenalite2.Pause();
+                chrPenalite3.Pause();
+                chrPenalite4.Pause();
+                chrPenalite5.Pause();
+                chrPenalite6.Pause();
+            }
 
             await Task.Delay(25);
         }

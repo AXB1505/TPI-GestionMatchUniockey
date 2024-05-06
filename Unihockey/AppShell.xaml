@@ -7,6 +7,7 @@
     Shell.FlyoutBehavior="Disabled"
     Title="Unihockey">
 
+    <!--Définition de la barre de navigation de l'application-->
     <TabBar>
         <Tab Title="Accueil">
             <ShellContent
@@ -25,3 +26,5 @@
         </Tab>
     </TabBar>
 </Shell>
+
+    
