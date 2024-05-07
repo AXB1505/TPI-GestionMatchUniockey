@@ -4,6 +4,7 @@
 */
 
 -- Insertion de données
+-- Toutes les équipes du canton de Neuchâtel
 
 -- Equipe
 INSERT INTO Equipe(nom, Cat_num) VALUES
@@ -55,5 +56,5 @@ INSERT INTO Equipe(nom, Cat_num) VALUES
     ('UHC Bevaix', 7),
     ('UHC Cornaux', 7),
     ('UHC La Brévine', 7),
-    ('UHC La Chaux-de-Fonds', 7),
+    ('UHC La Chaux-de-Fonds', 7)
 ;
