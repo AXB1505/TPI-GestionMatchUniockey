@@ -28,7 +28,7 @@ public partial class Accueil : ContentPage
         int iDureePeriode = 20;
 
         // Demande de la catégorie du match à l'utilisateur
-        string strRep = await DisplayActionSheet("Choisir la catégorie", "Annuler", null, "Juniors D", "Juniors C", "Juniors B", "Juniors A", "Homme", "Femme");
+        string strRep = await DisplayActionSheet("Choisir la catégorie :", "Annuler", null, "Juniors D", "Juniors C", "Juniors B", "Juniors A", "Homme", "Femme");
         // Si l'utilisateur annule ou ferme la fenêtre, l'application ne fait rien
         if (strRep == "Annuler" || strRep == null)
         {
