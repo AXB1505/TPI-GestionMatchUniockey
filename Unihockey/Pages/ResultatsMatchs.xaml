@@ -4,8 +4,11 @@
              x:Class="Unihockey.Pages.ResultatsMatchs"
              Style="{StaticResource PagesStyle}">
     
+    <!--Conteneur des éléments de la page-->
     <FlexLayout Direction="Column"
                 AlignItems="Center">
+        
+        <!--Titre de la page-->
         <Label 
             Text="Résultats des matchs"
             VerticalOptions="Center" 
@@ -14,6 +17,7 @@
             TextDecorations="Underline"
             Margin="10"/>
 
+        <!--Bouton pour recharger la liste des matchs-->
         <Button Text="Recharger la liste"
                 Clicked="OnbtnRechargerClicked"
                 WidthRequest="200"
@@ -22,6 +26,7 @@
             
         </Button>
 
+        <!--Grille pour afficher les titres des colonnes-->
         <Grid ColumnDefinitions="400,400,120,150"
               HorizontalOptions="Center"
               BackgroundColor="LightBlue">
@@ -39,6 +44,7 @@
             </Border>
         </Grid>
 
+        <!--Liste des matchs-->
         <ListView x:Name="lvMatchs"
                   WidthRequest="1070"
                   HeightRequest="400">
@@ -46,6 +52,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
+                            <!--Grille des colonnes des matchs-->
                             <Grid ColumnDefinitions="400,400,60,60,150">
                                 <Border Grid.Column="0" Background="White">
                                     <Label Text="{Binding Path=Equipe1}" FontSize="Small" />

@@ -84,6 +84,6 @@ INSERT INTO Categorie(nom) VALUES
     ('Juniors C'),
     ('Juniors B'),
     ('Juniors A'),
-    ('Femme'),
-    ('Homme')
+    ('Femmes'),
+    ('Hommes')
 ;

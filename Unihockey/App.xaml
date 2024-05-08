@@ -5,12 +5,9 @@
              x:Class="Unihockey.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>-->
-            </ResourceDictionary.MergedDictionaries>
             <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
             <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            <!--Style des labels de l'application-->
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="OppenSansRegular"/>
                 <Setter Property="HorizontalOptions" Value="Center" />
@@ -22,37 +19,45 @@
             <Style x:Key="PagesStyle" TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="LightGray" />
             </Style>
+            <!--Style des chronomètres de l'application-->
             <Style x:Key="ChronometreStyle" TargetType="Border">
                 <Setter Property="BackgroundColor" Value="#EEE" />
                 <Setter Property="MinimumHeightRequest" Value="50"/>
                 <Setter Property="MinimumWidthRequest" Value="200"/>
             </Style>
+            <!--Style des boutons de points de l'application-->
             <Style x:Key="PointStyle" TargetType="Border">
                 <Setter Property="Background" Value="#EEE"/>
             </Style>
+            <!--Style des boutons de l'application-->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="Background" Value="DarkGray"></Setter>
             </Style>
+            <!--Style des pickers de l'application-->
             <Style TargetType="Picker">
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="BackgroundColor" Value="WhiteSmoke" />
             </Style>
+            <!--Style des penalité-->
             <Style x:Key="PenaliteStyle" TargetType="Border">
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
+            <!--Style du chronomètre principal-->
             <Style x:Key="btnChronometrePrincpial" TargetType="Button">
                 <Setter Property="FontSize" Value="13"/>
                 <Setter Property="WidthRequest" Value="90"/>
                 <Setter Property="HeightRequest" Value="35"/>
             </Style>
+            <!--Style des boutons de penalité-->
             <Style x:Key="btnPenalite" TargetType="Button">
                 <Setter Property="FontSize" Value="10"/>
                 <Setter Property="WidthRequest" Value="80"/>
                 <Setter Property="HeightRequest" Value="25"/>
             </Style>
+            <!--Style des entrée de texte de l'application-->
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="BackgroundColor" Value="White"></Setter>

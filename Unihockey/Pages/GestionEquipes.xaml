@@ -4,22 +4,24 @@
              x:Class="Unihockey.Pages.GestionEquipes"
              Style="{StaticResource PagesStyle}">
 
+    <!--Conteneur des éléments de la page-->
     <FlexLayout Direction="Column"
                 AlignItems="Center">
         
+        <!--Titre de la page-->
         <Label Text="Gestion des équipes"
                FontSize="Large"
                TextDecorations="Underline"
                Margin="10"/>
         
+        <!--Boutons création d'équipe et de rechargement de la liste-->
         <Button Text="Créer une équipe"
                 Clicked="OnbtnCreerClicked"/>
-        
         <Button Text="Recharger"
                 Clicked="OnbtnRechargerClicked"
                 Margin="0,2,0,10"/>
 
-
+        <!--Grille de dispo-->
         <Grid ColumnDefinitions="400,150"
               HorizontalOptions="Center"
               BackgroundColor="LightBlue">
@@ -30,6 +32,8 @@
                 <Label Text="Catégorie" TextDecorations="Underline" />
             </Border>
         </Grid>
+        
+        <!--Grille pour afficher les titres des colonnes-->
         <ListView x:Name="lvEquipes"
                   WidthRequest="550"
                   HeightRequest="380"
@@ -38,6 +42,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
+                            <!--Grille des colonnes des matchs-->
                             <Grid ColumnDefinitions="400,150">
                                 <Border Grid.Column="0" Background="White">
                                     <Label Text="{Binding Path=Nom}" FontSize="Small" />
