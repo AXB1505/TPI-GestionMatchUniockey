@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Unihockey.Pages.GestionMatch"
+             xmlns:controls="clr-namespace:Unihockey.Pages.Controls"
+             Style="{StaticResource PagesStyle}">
+
+    <!--Title="GestionMatch"-->
+
+    <!--Grille de disposition de la page de chronomètrage-->
+    <Grid RowDefinitions="3*,1*,2*">
+        
+        <Grid Grid.Row="0"
+              RowDefinitions="6*,*">
+
+            <!--Chronometre principal et période-->
+            <VerticalStackLayout Grid.Row="0">
+                <Border Style="{StaticResource ChronometreStyle}"
+                    WidthRequest="630"
+                    Margin="20,20,20,0">
+                    <Label x:Name="lblChrPrincipal"
+                       Text="00:00"
+                       FontSize="150"/>
+                </Border>
+                <Border WidthRequest="80"
+                        HeightRequest="40"
+                        BackgroundColor="White">
+                    <Label x:Name="lblPeriode"
+                           Text="1"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <!--Emplacement des boutons du chronomètre principal-->
+            <HorizontalStackLayout Grid.Row="1" 
+                                   BackgroundColor="Transparent"
+                                   HorizontalOptions="Center"
+                                   Spacing="10">
+                <Button x:Name="btnPlay"
+                        Text="Play"
+                        Clicked="OnbtnPlayClicked"
+                        Style="{StaticResource btnChronometrePrincpial}"/>
+                <Button x:Name="btnPause"
+                        Text="Pause"
+                        Clicked="OnbtnPauseClicked"
+                        Style="{StaticResource btnChronometrePrincpial}"/>
+                <Button x:Name="btnStop"
+                        Text="Stop"
+                        Clicked="OnbtnStopClicked"
+                        Style="{StaticResource btnChronometrePrincpial}"/>
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <CheckBox x:Name="cbxCroissant"
+                                  CheckedChanged="OnCbxCroissantCheckedChanged"/>
+                    <Label Text="Croissant ?"
+                               FontSize="15"/>
+                </HorizontalStackLayout>
+                <Button Text="Afficher"
+                        Clicked="OnbtnAffichageSecondEcranClicked"/>
+
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!--Grille de disposition des équipes et du temps mort-->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,2*,*"
+              Padding="0,0,0,5">
+
+            <!--Conteneur de la liste déroulante de l'équipe 1-->
+            <Grid Grid.Column="0"
+                  ColumnDefinitions="5*,1*">
+                <Picker x:Name="pickEquipe1" 
+                        SelectedIndexChanged="OnpickEquipeSelectedItemChanged"
+                        Grid.Column="0"/>
+                <Grid Grid.Column="1"
+                      RowDefinitions="*,*">
+                    <Button Text="+"
+                            Clicked="OnbtnAjouterEquipeClicked"
+                            Grid.Row="0"/>
+                    <Button Text="↻"
+                            Grid.Row="1"
+                            Clicked="OnbtnRechargerEquipeClicked"/>
+                </Grid>
+
+            </Grid>
+            
+            <!--Conteneur du chronomètre de temps mort-->
+            <VerticalStackLayout Grid.Column="1">
+                <Border Style="{StaticResource ChronometreStyle}"
+                        WidthRequest="300">
+                    <Label x:Name="lblChrTempsMort"
+                       Text="00:00"
+                       FontSize="20"/>
+                </Border>
+                <HorizontalStackLayout Grid.Row="1" 
+                                   BackgroundColor="Transparent"
+                                   HorizontalOptions="Center"
+                                   Spacing="14">
+                    <Button Text="Play"
+                            Clicked="OnbtnPlayTempsMortClicked"
+                            Style="{StaticResource btnPenalite}"/>
+                    <Button Text="Pause"
+                            Clicked="OnbtnPauseTempsMortClicked"
+                            Style="{StaticResource btnPenalite}"/>
+                    <Button Text="Stop"
+                            Clicked="OnbtnStopTempsMortClicked"
+                            Style="{StaticResource btnPenalite}"
+                            />
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="cbxTempsMort"/>
+                        <Label Text="Afficher ?"
+                               FontSize="15"/>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!--Conteneur de la liste déroulante de l'équipe 2-->
+            <Grid Grid.Column="2"
+                  ColumnDefinitions="5*,1*">
+                <Picker x:Name="pickEquipe2" 
+                        SelectedIndexChanged="OnpickEquipeSelectedItemChanged"
+                        Grid.Column="0"/>
+                <Grid Grid.Column="1"
+                      RowDefinitions="*,*">
+                    <Button Text="+"
+                            Clicked="OnbtnAjouterEquipeClicked"
+                            Grid.Row="0"/>
+                    <Button Text="↻"
+                            Grid.Row="1"
+                            Clicked="OnbtnRechargerEquipeClicked"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Grille de disposition des points et des pénalités-->
+        <Grid Grid.Row="2" 
+              ColumnDefinitions="1*,2*,1*">
+
+            <!-- Grille de disposition des points de l'équipes 1-->
+            <Grid Grid.Column="0"
+                  ColumnDefinitions="1*,4*,1*">
+                <Button Grid.Column="0" Text="-" FontSize="40" Clicked="OnbtnPointMoinsEquipe1Clicked"/>
+                <Border Grid.Column="1" Style="{StaticResource PointStyle}">
+                    <Label Text="0" FontSize="150" x:Name="lblPointEquipe1"/>
+                </Border>
+                <Button Grid.Column="2" Text="+" FontSize="40" Clicked="OnbtnPointPlusEquipe1Clicked"/>
+            </Grid>
+
+            <!--Grille de disposition des pénalités-->
+            <Grid Grid.Column="1"
+                  RowDefinitions="*,*,*"
+                  ColumnDefinitions="*,*"
+                  Padding="10">
+
+                <!--Conteneur de la pénalité 1 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="0"
+                                     HorizontalOptions="Center">
+                    <HorizontalStackLayout>
+                        <VerticalStackLayout x:Name="boxPenalite1" 
+                                             IsVisible="False">
+                            <Border Style="{StaticResource PenaliteStyle}">
+                                <Label Text="00:00"
+                                       x:Name="lblPenalite1"/>
+                            </Border>
+                            <HorizontalStackLayout>
+                                <Button Text="Play"
+                                        Clicked="OnbtnStartPenalite1Clicked"
+                                        Style="{StaticResource btnPenalite}"/>
+                                <Button Text="Pause"
+                                        Clicked="OnbtnPausePenalite1Clicked"
+                                        Style="{StaticResource btnPenalite}"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <CheckBox x:Name="cbxPenalite1"
+                                  IsChecked="false"
+                                  CheckedChanged="OncbxPenalite1VisibleChecked"/>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 2 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="0"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout x:Name="boxPenalite2" 
+                                         IsVisible="False">
+                        <Border Style="{StaticResource PenaliteStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite2"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"
+                                    Clicked="OnbtnStartPenalite2Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                            <Button Text="Pause"
+                                    Clicked="OnbtnPausePenalite2Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox x:Name="cbxPenalite2"
+                              IsChecked="false"
+                              CheckedChanged="OncbxPenalite2VisibleChecked"/>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 3 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="1"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout x:Name="boxPenalite3" 
+                                         IsVisible="False">
+                        <Border Style="{StaticResource PenaliteStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite3"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"
+                                    Clicked="OnbtnStartPenalite3Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                            <Button Text="Pause"
+                                    Clicked="OnbtnPausePenalite3Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox x:Name="cbxPenalite3"
+                              IsChecked="false"
+                              CheckedChanged="OncbxPenalite3VisibleChecked"/>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 4 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="1"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout x:Name="boxPenalite4" 
+                                         IsVisible="False">
+                        <Border Style="{StaticResource PenaliteStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite4"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"
+                                    Clicked="OnbtnStartPenalite4Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                            <Button Text="Pause"
+                                    Clicked="OnbtnPausePenalite4Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox x:Name="cbxPenalite4"
+                              IsChecked="false"
+                              CheckedChanged="OncbxPenalite4VisibleChecked"/>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 5 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="0" Grid.Row="2"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout x:Name="boxPenalite5" 
+                                         IsVisible="False">
+                        <Border Style="{StaticResource PenaliteStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite5"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"
+                                    Clicked="OnbtnStartPenalite5Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                            <Button Text="Pause"
+                                    Clicked="OnbtnPausePenalite5Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox x:Name="cbxPenalite5"
+                              IsChecked="false"
+                              CheckedChanged="OncbxPenalite5VisibleChecked"/>
+                </HorizontalStackLayout>
+
+                <!--Conteneur de la pénalité 6 avec les boutons d'action du chronomètre-->
+                <HorizontalStackLayout Grid.Column="1" Grid.Row="2"
+                                     HorizontalOptions="Center">
+                    <VerticalStackLayout x:Name="boxPenalite6" 
+                                         IsVisible="False">
+                        <Border Style="{StaticResource PenaliteStyle}">
+                            <Label Text="00:00"
+                                   x:Name="lblPenalite6"/>
+                        </Border>
+                        <HorizontalStackLayout>
+                            <Button Text="Play"
+                                    Clicked="OnbtnStartPenalite6Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                            <Button Text="Pause"
+                                    Clicked="OnbtnPausePenalite6Clicked"
+                                    Style="{StaticResource btnPenalite}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <CheckBox x:Name="cbxPenalite6"
+                              IsChecked="false"
+                              CheckedChanged="OncbxPenalite6VisibleChecked"/>
+                </HorizontalStackLayout>
+
+            </Grid>
+
+            <!-- Grille de disposition des points de l'équipes 2-->
+            <Grid Grid.Column="2"
+                ColumnDefinitions="1*,4*,1*">
+                <Button Grid.Column="0" Text="-" FontSize="40" Clicked="OnbtnPointMoinsEquipe2Clicked"/>
+                <Border Grid.Column="1" Style="{StaticResource PointStyle}">
+                    <Label Text="0" FontSize="150" x:Name="lblPointEquipe2"/>
+                </Border>
+                <Button Grid.Column="2" Text="+" FontSize="40" Clicked="OnbtnPointPlusEquipe2Clicked"/>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</ContentPage>
