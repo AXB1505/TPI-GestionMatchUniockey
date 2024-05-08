@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Unihockey.Pages.ResultatsMatchs"
+             Style="{StaticResource PagesStyle}">
+    
+    <!--Conteneur des éléments de la page-->
+    <FlexLayout Direction="Column"
+                AlignItems="Center">
+        
+        <!--Titre de la page-->
+        <Label 
+            Text="Résultats des matchs"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="Large"
+            TextDecorations="Underline"
+            Margin="10"/>
+
+        <!--Bouton pour recharger la liste des matchs-->
+        <Button Text="Recharger la liste"
+                Clicked="OnbtnRechargerClicked"
+                WidthRequest="200"
+                HeightRequest="40"
+                Margin="0,0,0,10">
+            
+        </Button>
+
+        <!--Grille pour afficher les titres des colonnes-->
+        <Grid ColumnDefinitions="400,400,120,150"
+              HorizontalOptions="Center"
+              BackgroundColor="LightBlue">
+            <Border Grid.Column="0">
+                <Label Text="Equipe 1" TextDecorations="Underline" />
+            </Border>
+            <Border Grid.Column="1">
+                <Label Text="Equipe 2" TextDecorations="Underline" />
+            </Border>
+            <Border Grid.Column="2">
+                <Label Text="Score" TextDecorations="Underline" />
+            </Border>
+            <Border Grid.Column="3">
+                <Label Text="Date" TextDecorations="Underline" />
+            </Border>
+        </Grid>
+
+        <!--Liste des matchs-->
+        <ListView x:Name="lvMatchs"
+                  WidthRequest="1070"
+                  HeightRequest="400">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <!--Grille des colonnes des matchs-->
+                            <Grid ColumnDefinitions="400,400,60,60,150">
+                                <Border Grid.Column="0" Background="White">
+                                    <Label Text="{Binding Path=Equipe1}" FontSize="Small" />
+                                </Border>
+                                <Border Grid.Column="1" Background="White">
+                                    <Label Text="{Binding Path=Equipe2}" FontSize="Small" />
+                                </Border>
+                                <Border Grid.Column="2" Background="White">
+                                    <Label Text="{Binding Path=ScoreEquipe1}" />
+                                </Border>
+                                <Border Grid.Column="3" Background="White">
+                                    <Label Text="{Binding Path=ScoreEquipe2}" />
+                                </Border>
+                                <Border Grid.Column="4" Background="White">
+                                    <Label Text="{Binding Path=DebutMatch}" FontSize="Small"/>
+                                </Border>
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </FlexLayout>
+</ContentPage>
